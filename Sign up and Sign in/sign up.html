@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sign Up</title>
+        <link rel="stylesheet" href="sign up.css">
+    </head>
+    <body>
+        <h1>Sign Up</h1>
+        <form action="/submit_signup" method="post" id="signupForm">
+            <div class="form-group">
+            <label for="First name">First Name:</label><br><br>
+            <input type="text" id="First name" name="First name" placeholder="Enter First Name" required><br><br>
+            <div class="error" id="firstNameError"></div>
+            </div>
+            <div class="form-group">
+            <label for="Last name">Last Name:</label><br><br>
+            <input type="text" id="Last name" name="Last name" placeholder="Enter Last Name" required><br><br>
+            <div class="error" id="lastNameError"></div>
+            </div>
+            <div class="form-group">
+            <label for="email">Email:</label><br><br>
+            <input type="email" id="email" name="email" placeholder="Enter Email" required><br><br>
+            <div class="error" id="emailError"></div>
+            </div>
+            <div class="form-group">
+            <label for="phone Number">Phone Number:</label><br><br>
+            <input type="tel" id="phone Number" name="phone Number" placeholder="Enter Phone Number" required><br><br>
+            <div class="error" id="phoneError"></div>
+            </div>
+            <div class="form-group">
+            <label for="password">Password:</label><br><br>
+            <input type="password" id="password" name="password" placeholder="Enter Password" required><br><br>
+            <div class="error" id="passwordError"></div>
+            </div>
+            <div class="form-group">
+            <label for="confirm_password">Confirm Password:</label><br><br>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required><br><br>
+            <div class="error" id="confirmPasswordError"></div>
+            </div>
+            <div class="form-group">
+            <input type="checkbox" id="terms" name="terms" required>
+            <label for="terms">I agree to the <a href="#">Terms and Conditions</a></label><br><br>
+            <div class="error" id="termsError"></div>
+            </div>
+            <div class="form-group">
+            <button type="button" value="Sign Up" onclick="window.location.href='sign in.html'">Create an account</button>
+            <div class="error" id="submitError"></div>
+            </div>
+            <p>Already have an account? <a href="sign in.html">sign in here</a></p>
+        </form>
+        <script src="sign up.js"></script>
+    </body>
+</html>
