@@ -7,58 +7,80 @@
         <link rel="stylesheet" href="sign up.css">
     </head>
     <body>
-        <h1>Sign Up</h1>
-        <ul>
+        <header
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html"><img src="Assets/logo.png" alt="Logo" class="logo"></a></li>
+                    <li><a href="home.html" id="spacer">Home</a></li>
+                    <li><a href="features.html" id="spacer">Features</a></li>
+                    <li><a href="pricing.html" id="spacer">Pricing</a></li>
+                    <li><a href="about.html" id="spacer">About Us</a></li>
+                    <li><a href="contact.html" id="spacer">Contact Us</a></li>
+                    <li><a href="sign in.html" id="sign-in">Sign In</a></li>
+                    <li><a href="sign up.html" id="sign-up" >Sign Up</a></li>
+                </ul>
+            </nav>
+        </header>
+        <ul class="form-image-container">
             <li>
                 <img src="Assets/signup and sign in.jpg" alt="Sign Up Image" class="signup-image">
             </li>
         <li>
             <div class="form-container">
-        <form action="/submit_signup" method="post" id="signupForm">
+                <h1>Sign Up</h1>
+                <br>
+        <form id="signupForm">
             <div class="form-group">
-            <label for="First name">First Name:</label><br><br>
-            <input type="text" id="First name" name="First name" placeholder="Enter First Name" required><br><br>
+            <label id="First-name">First Name:</label><br>
+            <input type="text" id="firstName" name="First name" placeholder="Enter First Name">
             <div class="error" id="firstNameError"></div>
             </div>
             <div class="form-group">
-            <label for="Last name">Last Name:</label><br><br>
-            <input type="text" id="Last name" name="Last name" placeholder="Enter Last Name" required><br><br>
+            <label id="Last-name">Last Name:</label><br>
+            <input type="text" id="lastName" name="Last name" placeholder="Enter Last Name">
             <div class="error" id="lastNameError"></div>
             </div>
             <div class="form-group">
-            <label for="email">Email:</label><br><br>
-            <input type="email" id="email" name="email" placeholder="Enter Email" required><br><br>
+            <label id="Business">Business Name:</label><br>
+            <input type="text" id="bName" name="Business" placeholder="Enter Business Name">
+            <div class="error" id="BnameError"></div>
+            </div>
+            <div class="form-group">
+            <label id="email-add">Email:</label><br>
+            <input type="email" id="email" name="email" placeholder="Enter Email">
             <div class="error" id="emailError"></div>
             </div>
             <div class="form-group">
-            <label for="phone Number">Phone Number:</label><br><br>
-            <input type="tel" id="phone Number" name="phone Number" placeholder="Enter Phone Number" required><br><br>
+            <label id="phone-Number">Phone Number:</label><br>
+            <input type="tel" id="phoneNumber" name="phone Number" placeholder="Enter Phone Number">
             <div class="error" id="phoneError"></div>
             </div>
             <div class="form-group">
-            <label for="password">Password:</label><br><br>
-            <input type="password" id="password" name="password" placeholder="Enter Password" required><br><br>
-            <div class="error" id="passwordError"></div>
+            <label id="password">Password:</label><br>
+            <input type="password" id="pWord" name="password" placeholder="Enter Password">
+            <div class="error" id="pwordError"></div>
             </div>
             <div class="form-group">
-            <label for="confirm_password">Confirm Password:</label><br><br>
-            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required><br><br>
-            <div class="error" id="confirmPasswordError"></div>
+            <label id="confirm_password">Confirm Password:</label><br>
+            <input type="password" id="cPassword" name="confirm_password" placeholder="Confirm Password">
+            <div class="error" id="cPasswordError"></div>
             </div>
             <div class="form-group">
-            <input type="checkbox" id="terms" name="terms" required>
-            <label for="terms">I agree to the <a href="#">Terms and Conditions</a></label><br><br>
+            <input type="checkbox" id="terms" name="terms">
+            <label for="terms">I agree to the <span><a href="#">Terms and Conditions</a></span></label>
             <div class="error" id="termsError"></div>
             </div>
-            <div class="form-group">
-            <button type="button" class="submit-btn" value="Sign Up" onclick="window.location.href='sign in.html'">Create an account</button>
-            <div class="error" id="submitError"></div>
-            </div>
-            <p>Already have an account? <a href="sign in.html">sign in here</a></p>
+            <input type="submit" class="submit-btn" onclick="submitForm()"><br>
+            <p>Already have an account? <span><a href="sign in.html">sign in here</a></span> </p>
         </form>
         </div>
         </li>
         </ul>
         <script src="sign up.js"></script>
+        <br><br>
+        <br><br>
+        <footer>
+                <p>&copy; 2025 Vephla Students Project. All rights reserved.</p>
+        </footer>
     </body>
 </html>
