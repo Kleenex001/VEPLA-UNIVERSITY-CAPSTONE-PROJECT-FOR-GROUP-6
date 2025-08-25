@@ -42,6 +42,7 @@ body {
 
 .success-card button:hover {
   background: #fff;
+    color: rgba(0, 150, 136, 1);
 }
 
 @keyframes fadeIn {
