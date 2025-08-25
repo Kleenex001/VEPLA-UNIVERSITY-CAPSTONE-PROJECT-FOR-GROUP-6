@@ -361,7 +361,7 @@ a:visited:focus {
     outline: none;
     box-shadow: 0 0 5px var(--button-color);
 }
-footer {
+footer, p {
     position: fixed;
     bottom: 0;
     width: 100%;
