@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin — Settings</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="app.js"></script>
+</head>
+<body data-page="settings">
+  <aside class="sidebar">
+    <div class="brand">Vephla</div>
+    <nav>
+      <a href="index.html" class="nav">Dashboard</a>
+      <a href="Sales Management.html" class="nav">Sales</a>
+      <a href="Inventory Management.html" class="nav">Inventory</a>
+      <a href="Customers Management.html" class="nav">Customers</a>
+      <a href="Deliveries Management.html" class="nav">Deliveries</a>
+      <a href="Supplier.html" class="nav">Suppliers</a>
+      <a href="Settings & Backup.html" class="nav active">Settings</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <h1>Settings</h1>
+    </header>
+
+    <section class="card">
+      <h3>Account</h3>
+      <form id="profileForm" class="stack">
+        <label>Business Name<input name="business"></label>
+        <label>Email<input type="email" name="email"></label>
+        <label>Phone<input name="phone"></label>
+        <div><button type="submit" class="btn">Save</button></div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h3>Data Backup</h3>
+      <div class="stack">
+        <button id="exportAllBtn2" class="btn outline">Export All CSV</button>
+        <input id="importAll" type="file" accept=".json" class="file-input" />
+        <button id="importBtn" class="btn">Import Data</button>
+        <button id="clearAllBtnSettings" class="btn danger">Clear All Data</button>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

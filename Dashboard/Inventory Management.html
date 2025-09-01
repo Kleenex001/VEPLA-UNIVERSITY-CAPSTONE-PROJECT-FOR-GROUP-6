@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin — Inventory</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body data-page="inventory">
+  <aside class="sidebar">
+    <div class="brand">Vephla</div>
+    <nav>
+      <a href="dashboard.html" class="nav">Dashboard</a>
+      <a href="sales.html" class="nav">Sales</a>
+      <a href="inventory.html" class="nav active">Inventory</a>
+      <a href="customers.html" class="nav">Customers</a>
+      <a href="deliveries.html" class="nav">Deliveries</a>
+      <a href="suppliers.html" class="nav">Suppliers</a>
+      <a href="settings.html" class="nav">Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <button id="exportProductsBtn" class="btn outline">Export Products CSV</button>
+      <button id="clearAllBtn3" class="btn danger">Clear All Data</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <h1>Inventory Management</h1>
+      </div>
+      <div class="right">
+        <button id="openAddProduct" class="btn">+ Add Product</button>
+      </div>
+    </header>
+
+    <section class="card">
+      <canvas id="stockChart" height="120"></canvas>
+    </section>
+
+    <section class="card">
+      <div class="table-actions">
+        <input id="productSearch" placeholder="Search products..." class="input" />
+        <input id="importProducts" type="file" accept=".csv" class="file-input" />
+      </div>
+
+      <div class="table-wrap">
+        <table id="productTable" class="data-table">
+          <thead>
+            <tr><th>#</th><th>Product</th><th>Category</th><th>Stock</th><th>Reorder</th><th>Price</th><th></th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Product Modal -->
+  <div class="modal" id="productModal">
+    <div class="modal-content">
+      <button class="modal-close" data-close="productModal">&times;</button>
+      <h3 id="productModalTitle">Add Product</h3>
+      <form id="productForm">
+        <label>Name<input name="name" required></label>
+        <label>Category<input name="category"></label>
+        <label>Stock<input name="stock" type="number" required></label>
+        <label>Reorder Level<input name="reorder" type="number" required></label>
+        <label>Price<input name="price" type="number" required></label>
+        <div class="modal-actions">
+          <button type="submit" class="btn">Save</button>
+          <button type="button" class="btn outline" data-close="productModal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

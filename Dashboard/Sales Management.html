@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin — Sales</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body data-page="sales">
+  <aside class="sidebar">
+    <div class="brand">Vephla</div>
+    <nav>
+      <a href="dashboard.html" class="nav">Dashboard</a>
+      <a href="sales.html" class="nav active">Sales</a>
+      <a href="inventory.html" class="nav">Inventory</a>
+      <a href="customers.html" class="nav">Customers</a>
+      <a href="deliveries.html" class="nav">Deliveries</a>
+      <a href="suppliers.html" class="nav">Suppliers</a>
+      <a href="settings.html" class="nav">Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <button id="exportSalesBtn" class="btn outline">Export Sales CSV</button>
+      <button id="clearAllBtn2" class="btn danger">Clear All Data</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <h1>Sales Management</h1>
+      </div>
+      <div class="right">
+        <button id="openAddSale" class="btn">+ Add Sale</button>
+      </div>
+    </header>
+
+    <section class="card">
+      <canvas id="salesChart" height="120"></canvas>
+    </section>
+
+    <section class="card">
+      <div class="table-actions">
+        <input id="salesSearch" placeholder="Search sales..." class="input" />
+        <button id="exportSalesBtn2" class="btn outline">Export</button>
+        <input id="importSales" type="file" accept=".csv" class="file-input" />
+      </div>
+
+      <div class="table-wrap">
+        <table id="salesTable" class="data-table">
+          <thead>
+            <tr><th>#</th><th>Order ID</th><th>Customer</th><th>Product</th><th>Amount</th><th>Date</th><th>Status</th><th></th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Add/Edit Sale Modal -->
+  <div class="modal" id="saleModal">
+    <div class="modal-content">
+      <button class="modal-close" data-close="saleModal">&times;</button>
+      <h3 id="saleModalTitle">Add Sale</h3>
+      <form id="saleForm">
+        <label>Order ID<input name="orderId" required></label>
+        <label>Customer<input name="customer" required></label>
+        <label>Product<input name="product" required></label>
+        <label>Amount<input name="amount" type="number" required></label>
+        <label>Date<input name="date" type="date" required></label>
+        <label>Status<select name="status"><option>paid</option><option>pending</option><option>overdue</option></select></label>
+        <div class="modal-actions">
+          <button type="submit" class="btn">Save</button>
+          <button type="button" class="btn outline" data-close="saleModal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

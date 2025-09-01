@@ -1,29 +1,96 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="icon" type="image/x-icon" href="Assets/logo.png" width="100px" height="100px">
-    <link rel="stylesheet" href="dashboard.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin — Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script defer src="app.js"></script>
 </head>
-<body>
-    <header>
-        <nav class="nav-links">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="settings.html">Settings</a></li>
-                <li><a href="logout.html">Logout</a></li>
-            </ul>
-        </nav>
+<body data-page="dashboard">
+  <aside class="sidebar">
+    <div class="brand">Vephla</div>
+    <nav>
+      <a href="dashboard.html" class="nav active">Dashboard</a>
+      <a href="Sales Management.html" class="nav">Sales</a>
+      <a href="Inventory Management.html" class="nav">Inventory</a>
+      <a href="Customers Management.html" class="nav">Customers</a>
+      <a href="Delivery Management.html" class="nav">Deliveries</a>
+      <a href="Suppliers.html" class="nav">Suppliers</a>
+      <a href="Settings & Backup.html" class="nav">Settings</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button id="exportAllBtn" class="btn outline">Export All CSV</button>
+      <button id="clearAllBtn" class="btn danger">Clear All Data</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="left">
+        <h1>Dashboard</h1>
+      </div>
+      <div class="right">
+        <div class="user">
+          <img src="assets/user.png" alt="user" class="avatar">
+          <div>
+            <div class="name">Jane Doe</div>
+            <div class="role">Business Owner</div>
+          </div>
+        </div>
+      </div>
     </header>
-    <main>
-        <h1>Welcome to the Dashboard</h1>
-        <p>Your recent activities will be displayed here.</p>
-    </main>
-    <footer>
-        <p>&copy; 2025 Vephla University Students Project. All rights reserved.</p>
-    </footer>
+
+    <section class="kpi-row">
+      <div class="kpi card">
+        <div class="kpi-title">Total Sales</div>
+        <div id="kpiSales" class="kpi-value">₦0</div>
+      </div>
+      <div class="kpi card">
+        <div class="kpi-title">Expenses</div>
+        <div id="kpiExpenses" class="kpi-value">₦0</div>
+      </div>
+      <div class="kpi card">
+        <div class="kpi-title">Profit</div>
+        <div id="kpiProfit" class="kpi-value">₦0</div>
+      </div>
+      <div class="kpi card">
+        <div class="kpi-title">Pending Deliveries</div>
+        <div id="kpiPending" class="kpi-value">0</div>
+      </div>
+    </section>
+
+    <section class="cards-grid">
+      <div class="card chart-card">
+        <div class="card-head">
+          <h3>Sales Analytics</h3>
+          <div class="segmented">
+            <button class="seg seg-active" data-range="monthly" data-chart="salesMain">Monthly</button>
+            <button class="seg" data-range="yearly" data-chart="salesMain">Yearly</button>
+          </div>
+        </div>
+        <canvas id="salesMain" height="140"></canvas>
+      </div>
+
+      <div class="card chart-card">
+        <div class="card-head">
+          <h3>Overdue Payment Analytics</h3>
+        </div>
+        <canvas id="overdueMain" height="140"></canvas>
+      </div>
+
+      <div class="card">
+        <h3>Top Customers</h3>
+        <ol id="topCustomers" class="list"></ol>
+      </div>
+
+      <div class="card">
+        <h3>Low Stock Alerts</h3>
+        <ul id="lowStockList" class="list"></ul>
+      </div>
+    </section>
+  </main>
 </body>
 </html>

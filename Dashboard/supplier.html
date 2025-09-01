@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin — Suppliers</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="app.js"></script>
+</head>
+<body data-page="suppliers">
+  <aside class="sidebar">
+    <div class="brand">Vephla</div>
+    <nav>
+      <a href="dashboard.html" class="nav">Dashboard</a>
+      <a href="sales.html" class="nav">Sales</a>
+      <a href="inventory.html" class="nav">Inventory</a>
+      <a href="customers.html" class="nav">Customers</a>
+      <a href="deliveries.html" class="nav">Deliveries</a>
+      <a href="suppliers.html" class="nav active">Suppliers</a>
+      <a href="settings.html" class="nav">Settings</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <h1>Supplier Management</h1>
+      <div class="right">
+        <button id="openAddSupplier" class="btn">+ Add Supplier</button>
+      </div>
+    </header>
+
+    <section class="card">
+      <div class="table-actions">
+        <input id="supplierSearch" placeholder="Search suppliers..." class="input" />
+      </div>
+
+      <div class="table-wrap">
+        <table id="supplierTable" class="data-table">
+          <thead>
+            <tr><th>#</th><th>Supplier</th><th>Contact</th><th>Products</th><th></th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

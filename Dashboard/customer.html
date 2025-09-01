@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin — Customers</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="app.js"></script>
+</head>
+<body data-page="customers">
+  <aside class="sidebar">
+    <div class="brand">Vephla</div>
+    <nav>
+      <a href="dashboard.html" class="nav">Dashboard</a>
+      <a href="sales.html" class="nav">Sales</a>
+      <a href="inventory.html" class="nav">Inventory</a>
+      <a href="customers.html" class="nav active">Customers</a>
+      <a href="deliveries.html" class="nav">Deliveries</a>
+      <a href="suppliers.html" class="nav">Suppliers</a>
+      <a href="settings.html" class="nav">Settings</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <h1>Customer Management</h1>
+      <div class="right">
+        <button id="exportCustomersBtn" class="btn outline">Export</button>
+      </div>
+    </header>
+
+    <section class="card">
+      <div class="table-actions">
+        <input id="customerSearch" placeholder="Search customers..." class="input" />
+      </div>
+
+      <div class="table-wrap">
+        <table id="customerTable" class="data-table">
+          <thead>
+            <tr><th>#</th><th>Name</th><th>Contact</th><th>Balance</th><th>Last Order</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

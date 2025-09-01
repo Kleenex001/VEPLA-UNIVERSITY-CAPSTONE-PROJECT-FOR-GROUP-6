@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin — Deliveries</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body data-page="deliveries">
+  <aside class="sidebar">
+    <div class="brand">Vephla</div>
+    <nav>
+      <a href="dashboard.html" class="nav">Dashboard</a>
+      <a href="sales.html" class="nav">Sales</a>
+      <a href="inventory.html" class="nav">Inventory</a>
+      <a href="customers.html" class="nav">Customers</a>
+      <a href="deliveries.html" class="nav active">Deliveries</a>
+      <a href="suppliers.html" class="nav">Suppliers</a>
+      <a href="settings.html" class="nav">Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <button id="exportDeliveriesBtn" class="btn outline">Export Deliveries CSV</button>
+      <button id="clearAllBtn4" class="btn danger">Clear All Data</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <h1>Delivery Management</h1>
+      <div class="right">
+        <button id="openAddDelivery" class="btn">+ Add Delivery</button>
+      </div>
+    </header>
+
+    <section class="card">
+      <canvas id="deliveryStatusChart" height="120"></canvas>
+    </section>
+
+    <section class="card">
+      <div class="table-actions">
+        <input id="deliverySearch" placeholder="Search deliveries..." class="input" />
+        <input id="importDeliveries" type="file" accept=".csv" class="file-input" />
+      </div>
+
+      <div class="table-wrap">
+        <table id="deliveryTable" class="data-table">
+          <thead>
+            <tr><th>#</th><th>Order ID</th><th>Customer</th><th>Mode</th><th>Worth</th><th>Date</th><th>Status</th><th></th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Delivery Modal -->
+  <div class="modal" id="deliveryModal">
+    <div class="modal-content">
+      <button class="modal-close" data-close="deliveryModal">&times;</button>
+      <h3 id="deliveryModalTitle">Add Delivery</h3>
+      <form id="deliveryForm">
+        <label>Order ID<input name="orderId" required></label>
+        <label>Customer<input name="customer" required></label>
+        <label>Mode<input name="mode"></label>
+        <label>Worth<input name="worth" type="number"></label>
+        <label>Date<input name="date" type="date" required></label>
+        <label>Status<select name="status"><option>pending</option><option>in-transit</option><option>completed</option><option>cancelled</option></select></label>
+        <div class="modal-actions">
+          <button type="submit" class="btn">Save</button>
+          <button type="button" class="btn outline" data-close="deliveryModal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
