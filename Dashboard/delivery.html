@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Customer Management | BizBoost</title>
-  <link rel="stylesheet" href="customer.css" />
+  <title>Delivery Management | BizBoost</title>
+  <link rel="stylesheet" href="delivery.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
-  <div class="dashboard-container">
-    <!-- Sidebar -->
+  <!-- Sidebar -->
+  <!-- Sidebar -->
 <aside class="sidebar">
   <div class="brand">
     <img src="Assets/logo.png" alt="BizBoost Logo" width="120"/>
@@ -39,148 +39,154 @@
   </nav>
 </aside>
 
-
-    <!-- Main -->
-    <main class="content">
-      <!-- Topbar -->
-      <header class="topbar">
-          <div>
-            <strong>Customer Management</strong><br>
-          </div>
-          <span class="spacer"></span>
+  <!-- Main -->
+  <main class="content">
+    <!-- Topbar -->
+    <header class="topbar">
+        <div>
+          <strong>Delivery Management</strong><br>
+        </div>
+        <span class="spacer"></span>
         <img src="Assets/logo.png" alt="bizboost logo" width="70px;" />
-      </header>
+    </header>
 
-      <!-- Customer Management Section -->
-      <section id="customers" class="page visible">
-        <h1></h1>
+    <!-- Delivery Management Section -->
+    <section id="delivery" class="page visible">
+      <h1></h1>
 
-        <!-- KPI Cards -->
-        <div class="kpis">
-          <div class="card kpi">
-            <i class="fa fa-check-circle"></i>
-            <div>
-              <p>Total Paid</p>
-              <h2 id="kpiPaid">0</h2>
-            </div>
-          </div>
-          <div class="card kpi">
-            <i class="fa fa-wallet"></i>
-            <div>
-              <p>Total Owed</p>
-              <h2 id="kpiOwed">0</h2>
-            </div>
-          </div>
-          <div class="card kpi">
-            <i class="fa fa-exclamation-circle"></i>
-            <div>
-              <p>Overdue Payment</p>
-              <h2 id="kpiOverdue">0</h2>
-            </div>
+      <!-- KPI Cards -->
+      <div class="kpis">
+        <div class="card kpi">
+          <i class="fa fa-truck"></i>
+          <div>
+            <p>Total Deliveries</p>
+            <h2 id="kpiTotal">0</h2>
           </div>
         </div>
-
-        <!-- Toolbar -->
-        <div class="toolbar">
-          <div class="left-tools">
-            <select id="filterSelect">
-              <option value="all">Filter: All</option>
-              <option value="paid">Paid</option>
-              <option value="owed">Owed</option>
-              <option value="overdue">Overdue</option>
-            </select>
-            <input type="search" id="searchInput" placeholder="Search" />
-          </div>
-          <div class="right-tools">
-            <button class="btn secondary" id="exportExcelBtn">Export to Excel</button>
-            <button class="btn primary" id="addCustomerBtn">Add Customer</button>
+        <div class="card kpi">
+          <i class="fa fa-check-circle"></i>
+          <div>
+            <p>Completed</p>
+            <h2 id="kpiCompleted">0</h2>
           </div>
         </div>
-
-        <!-- Table + Right Sidebar -->
-        <div class="grid-two">
-          <!-- Customer Table -->
-          <div class="card table-card">
-            <table>
-              <thead>
-                <tr>
-                  <th>S/N</th>
-                  <th>Customer Name</th>
-                  <th>Package Worth</th>
-                  <th>Quantity</th>
-                  <th>Payment Date</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="customerTableBody">
-                <!-- Filled dynamically -->
-              </tbody>
-            </table>
+        <div class="card kpi">
+          <i class="fa fa-clock"></i>
+          <div>
+            <p>Pending</p>
+            <h2 id="kpiPending">0</h2>
           </div>
+        </div>
+        <div class="card kpi">
+          <i class="fa fa-times-circle"></i>
+          <div>
+            <p>Cancelled</p>
+            <h2 id="kpiCancelled">0</h2>
+          </div>
+        </div>
+      </div>
 
-          <!-- Right Sidebar -->
-          <aside class="stats">
-            <!-- Overdue Payment -->
-            <div class="card">
-              <div class="card-header">
-                <h3>Overdue Payment</h3>
-                <div class="tabs">
-                  <button id="custMonthlyTab" class="active">Monthly</button>
-                  <button id="custYearlyTab">Yearly</button>
-                </div>
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <div class="left-tools">
+          <select id="filterDeliveries">
+            <option value="all">Filter: All</option>
+            <option value="completed">Completed</option>
+            <option value="pending">Pending</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+          <input type="search" id="searchDeliveries" placeholder="Search Deliveries" />
+        </div>
+        <button class="btn primary" id="addDeliveryBtn">Add New Delivery</button>
+      </div>
+
+      <!-- Grid: Table + Right Stats -->
+      <div class="grid-two">
+        <!-- Delivery Table -->
+        <div class="card table-card">
+          <div class="table-header">
+            <h3>Delivery Orders</h3>
+          </div>
+          <table id="deliveryTable">
+            <thead>
+              <tr>
+                <th>S/N</th>
+                <th>Customer Name</th>
+                <th>Package</th>
+                <th>Status</th>
+                <th>Delivery Date</th>
+                <th>Agent</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- Right Sidebar -->
+        <aside class="stats">
+          <!-- Delivery Overview -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Delivery Overview</h3>
+              <div class="tabs">
+                <button id="delMonthlyTab" class="active">Monthly</button>
+                <button id="delYearlyTab">Yearly</button>
               </div>
-              <canvas id="customerOverdueChart" height="120"></canvas>
             </div>
+            <canvas id="deliveryOverviewChart" height="120"></canvas>
+          </div>
 
-            <!-- Top Customers -->
-            <div class="card">
-              <h3>Top Customers</h3>
-              <ul id="topCustomersList">
-                <!-- Filled dynamically -->
-              </ul>
-            </div>
-          </aside>
-        </div>
-      </section>
-    </main>
-  </div>
+          <!-- Top Delivery Agents -->
+          <div class="card">
+            <h3>Top Delivery Agents</h3>
+            <ul id="topAgentsList"></ul>
+            <button class="btn primary" id="addAgentBtn">Add Delivery Agent</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
 
-  <!-- Add Customer Modal -->
-  <div class="modal" id="addCustomerModal">
+  <!-- Delivery Modal -->
+  <div id="deliveryModal" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Add Customer</h2>
-      <form id="addCustomerForm">
-        <label>Customer Name</label>
-        <input type="text" id="custName" required />
+      <h2>Add New Delivery</h2>
+      <label>Customer Name</label>
+      <input type="text" id="customerName" placeholder="Enter customer name">
 
-        <label>Package Worth (₦)</label>
-        <input type="number" id="custAmount" required />
+      <label>Package</label>
+      <input type="text" id="packageDetails" placeholder="Package details">
 
-        <label>Quantity</label>
-        <input type="number" id="custQty" required />
+      <label>Delivery Date</label>
+      <input type="date" id="deliveryDate">
 
-        <label>Payment Date</label>
-        <input type="date" id="custDate" required />
+      <label>Assign Agent</label>
+      <select id="deliveryAgent"></select>
 
-        <label>Status</label>
-        <select id="custStatus">
-          <option value="paid">Paid</option>
-          <option value="owed">Owed</option>
-        </select>
-
-        <button type="submit" class="btn primary">Add Customer</button>
-      </form>
+      <div class="modal-actions">
+        <button class="btn primary" id="saveDeliveryBtn">Save</button>
+        <button class="btn cancel" id="closeModalBtn">Cancel</button>
+      </div>
     </div>
   </div>
 
-  <!-- External Libraries -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <!-- Agent Modal -->
+  <div id="agentModal" class="modal">
+    <div class="modal-content">
+      <h2>Add Delivery Agent</h2>
+      <label>Agent Name</label>
+      <input type="text" id="agentName" placeholder="Enter agent name">
+      <div class="modal-actions">
+        <button class="btn primary" id="saveAgentBtn">Save</button>
+        <button class="btn cancel" id="closeAgentModalBtn">Cancel</button>
+      </div>
+    </div>
+  </div>
 
-  <!-- Customer Logic -->
-  <script src="customer.js"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="delivery.js"></script>
 
     <script>
   document.addEventListener("DOMContentLoaded", () => {
@@ -228,7 +234,7 @@
         }
         };
     </script>
-     <footer>
+    <footer>
     <nav class="bottom-nav">
       <button class="nav-bttm" data-target="dashboard" onclick="location.href='dashboard.html'" title="Dashboard">
         <i class="fa fa-chart-line"><br><p>Dashboard</p></i>
