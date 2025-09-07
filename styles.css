@@ -1458,16 +1458,13 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 60px auto;
+  margin: 30px auto;
   width: 100%;
 }
 
 .pricing-card {
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 20px;
-  width: 300px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  padding: 10px;
+  width: 400px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1542,7 +1539,7 @@ body {
 /* Testimonials Section */
 .testimonials {
   position: relative;
-  top: 100px;
+  top: 400px;
   background-color: #E0F2F1;
   padding: 60px 20px;
   text-align: center;
@@ -1838,10 +1835,15 @@ input[type="tel"] {
  
    .fa-solid a {
     position: absolute;
-    top: 50px;
+    top: 40px;
     left: 290px;
        display: block;
        overflow: hidden;
+       width: 50px;
+       height: 50px;
+   }
+   .fa-solid a :hover {
+       background-color: none;
    }
    .side-bar {
     position: fixed;
@@ -1909,38 +1911,42 @@ input[type="tel"] {
    }
    #logo img {
   position: absolute;
-  top: 0;
+  top: 10px;
   left: 10px;
-  width: 120px;
+  width: 100px;
 }
 
 .user-stat {
- width: 94%;
- height: 8vh;
+  position: relative;
+  top:80px;
+  left: 180px;;
+ width: 90%;
+ height: 11vh;
 }
 
 /* Hero Content */
 .hero-content {
   position: relative;
   left: 50%;
-  top: 80px;
+  top: -100px;
   max-width: 100%;
   text-align: center;
 }
 
 .hero h1 {
-  font-size: 35px;
+  font-size: 25px;
   color: #fff; /* white text */
 }
 
 .hero p {
-  font-size: 1.12rem;
+  font-size: 1.1rem;
   text-align: center;
   color: #f5f5f5; /* softer white for readability */
 }
 
 .hero-buttons {
   flex-direction: column;
+  margin-top: 30px;
 }
 .btn-primary, .btn-secondary {
     color: var(--button-color);
@@ -1987,7 +1993,7 @@ background-color: none;
   background: #009688;
   color: white;
   border-radius: 50%;
-   font-size: 1.3rem;
+   font-size: 1.5rem;
    text-align: center;
    justify-content: center;
    margin-top: 17px;
@@ -1999,6 +2005,7 @@ background-color: none;
   color: #666;
   padding: 60px 60px;
 }
+
 #service-container h3 {
   margin-left:50px;
   margin-top: -30px;
@@ -2006,12 +2013,14 @@ background-color: none;
 #service-container p {
   margin-left:50px;
   margin-top: 10px;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 
 }
 #feature-item {
   background-color: #fff;
    position: relative;
+   top:-190px;
+   left: 0px;
    right: 15px;
   bottom: 250px;
   display: block;
@@ -2065,8 +2074,14 @@ background-color: none;
   margin: 20px auto;
   text-align: center;
   padding: 0 20px;
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   color: #6e6e6e;
+}
+.features-intro p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #555;
+  padding: 0 20px;
 }
 .pricing-section {
   
@@ -2074,13 +2089,13 @@ background-color: none;
   justify-content: center;
   align-items: center;
   gap: 50px;
-  max-width: 1200px;
+  width: 300px;
   height: 100vh;
 }
 
 .pricing-card {
   position: relative;
-  top: 150px;
+  top: 100px;
   border-radius: 12px;
   padding: 20px;
   width: 300px;
@@ -2126,7 +2141,7 @@ background-color: none;
 }
 .testimonials {
   position: relative;
-  top: 400px;
+  top: 170px;
   left: 0px;
   background-color: #E0F2F1;
   padding: 60px 20px;
@@ -2208,9 +2223,12 @@ background-color: none;
 
 .team-section {
   position: relative;
-  top: 400px;
+  top: 150px;
   text-align: center;
   padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .team-header {
@@ -2229,7 +2247,30 @@ background-color: none;
   max-width: 600px;
   margin: 0 auto 40px;
 }
-
+.team-cards {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+.cta-container {
+  position: relative;
+  top: 70px;;
+  text-align: center;
+  border-radius: 12px;
+  max-width: 800px;
+  margin: 0 auto 60px;
+}
+.cta-container h2 {
+  font-size: 1.5rem;
+}
+.newsletter-section {
+  position: relative;
+  top: 100px;
+  padding: 40px;
+  text-align: center;
+  background: #f9f9f9;
+}
 .footer {
   background-color: #009688;
   color: #ffffff;
@@ -2321,8 +2362,4 @@ background-color: none;
   font-size: 14px;
   margin: 0;
 }
-
-
-
-
 }
