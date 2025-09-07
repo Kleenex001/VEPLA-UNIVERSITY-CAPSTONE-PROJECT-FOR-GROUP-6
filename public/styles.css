@@ -133,9 +133,9 @@ body {
 }
 #logo img {
   position: relative;
-  top: 0;
+  top: 30px;
   left: 30px;
-  width: 120px;
+  width: 60px;
 }
 #sign-up {
     position:relative;
@@ -1008,19 +1008,6 @@ body {
         flex-direction: row;
         padding: 0;
     }
-    .form-image-container {
-        flex-direction: row;
-        gap: 50px;
-        top: 200px;
-        left: 100px;
-    }
-    .form-container {
-        width: 600px;
-    }
-    .signup-image {
-        width: 470px;
-        top: 100px;
-    }
 }
 
 /* Tablet portrait */
@@ -1092,9 +1079,9 @@ body {
 }
 #logo img {
   position: relative;
-  top: 25px;
-  left: -5px;
-  width: 100px;
+  top: 40px;
+  left: 5px;
+  width: 60px;
 }
 #sign-up {
     position:relative;
@@ -1852,7 +1839,7 @@ input[type="tel"] {
    .fa-solid a {
     position: absolute;
     top: 40px;
-    left: 290px;
+    left: 320px;
        display: block;
        overflow: hidden;
        width: 50px;
@@ -1927,15 +1914,15 @@ input[type="tel"] {
    }
    #logo img {
   position: absolute;
-  top: 10px;
+  top: 30px;
   left: 10px;
-  width: 100px;
+  width: 70px;
 }
 
 .user-stat {
   position: relative;
   top:80px;
-  left: 180px;;
+  left: 190px;;
  width: 90%;
  height: 11vh;
 }
