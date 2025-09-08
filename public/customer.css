@@ -457,7 +457,7 @@ footer {
 }
 @media (max-width: 767px) {
   .sidebar { display: none; }
-    body { margin-left: 0; padding-bottom: 70px; flex-direction: column; display: flex; }
+    body { margin-left: 0; padding-bottom: 70px; flex-direction: column; display: flex;}
   .bottom-nav {
     display: flex;
     position: fixed; bottom: -10px; left: 0; right: 0;

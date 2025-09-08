@@ -1240,6 +1240,7 @@ background-color: #009688;
      body {
             flex-direction: column;
             height: 100vh;
+            overflow-x: hidden;
         }
    .nav-item a {
     display: none;
