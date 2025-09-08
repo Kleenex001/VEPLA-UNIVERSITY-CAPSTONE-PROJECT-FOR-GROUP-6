@@ -122,7 +122,7 @@ const termsError = document.getElementById("termsError");
         signupForm.reset();
         fetch('sign in.html').then(response => {
             if (response.ok) {
-                window.location.href = 'success.html'; // redirect to success page
+                window.location.href = 'sign in.html'; // redirect to success page
             } else {
                 alert('Error submitting form. Please try again.');
             }

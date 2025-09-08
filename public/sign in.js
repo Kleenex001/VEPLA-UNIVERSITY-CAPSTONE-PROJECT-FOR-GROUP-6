@@ -40,7 +40,7 @@ signinForm.addEventListener("submit", function (e) {
         // submit the form
         signinForm.submit();
         signinForm.reset();
-        fetch('success.html').then(response => {
+        fetch('dashboard.html').then(response => {
             if (response.ok) {
                 window.location.href = 'dashboard.html'; // redirect to dashboard
             } else {
