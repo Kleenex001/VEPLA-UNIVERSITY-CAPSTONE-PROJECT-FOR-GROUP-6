@@ -1,6 +1,5 @@
-// ==========================
+
 // Customer Management Logic
-// ==========================
 
 // State
 let customers = [];
@@ -49,9 +48,8 @@ const customerOverdueChart = new Chart(ctxCust, {
   }
 });
 
-// ==========================
+
 // Modal Logic
-// ==========================
 addCustomerBtn.addEventListener("click", () => {
   addCustomerModal.style.display = "block";
 });
@@ -66,9 +64,9 @@ window.addEventListener("click", (e) => {
   }
 });
 
-// ==========================
+
 // Add Customer
-// ==========================
+
 addCustomerForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -99,7 +97,7 @@ addCustomerForm.addEventListener("submit", (e) => {
 
 // ==========================
 // Render Table
-// ==========================
+
 function renderCustomers() {
   const filter = filterSelect.value;
   const search = searchInput.value.toLowerCase();
@@ -131,7 +129,7 @@ function renderCustomers() {
 
 // ==========================
 // KPIs
-// ==========================
+
 function updateKPIs() {
   let totalPaid = 0;
   let totalOwed = 0;
@@ -156,7 +154,7 @@ function updateKPIs() {
 
 // ==========================
 // Mark Paid
-// ==========================
+
 function markPaid(id) {
   const cust = customers.find(c => c.id === id);
   if (cust) {
@@ -168,9 +166,9 @@ function markPaid(id) {
   }
 }
 
-// ==========================
+
 // Top Customers
-// ==========================
+
 function updateTopCustomers() {
   const sorted = [...customers].sort((a, b) => b.amount - a.amount).slice(0, 3);
 
@@ -184,7 +182,7 @@ function updateTopCustomers() {
 
 // ==========================
 // Charts
-// ==========================
+
 function updateCharts() {
   const monthlyOverdue = Array(8).fill(0);
   const yearlyOverdue = Array(8).fill(0);
@@ -211,7 +209,7 @@ function updateCharts() {
 
 // ==========================
 // Tabs for Chart
-// ==========================
+
 document.getElementById("custMonthlyTab").addEventListener("click", () => {
   customerOverdueChart.data.datasets[0].data = custMonthlyData;
   customerOverdueChart.update();
@@ -228,13 +226,13 @@ document.getElementById("custYearlyTab").addEventListener("click", () => {
 
 // ==========================
 // Filters
-// ==========================
+
 filterSelect.addEventListener("change", renderCustomers);
 searchInput.addEventListener("input", renderCustomers);
 
 // ==========================
 // Export to Excel
-// ==========================
+
 document.getElementById("exportExcelBtn").addEventListener("click", () => {
   if (customers.length === 0) {
     alert("No data to export!");
@@ -255,12 +253,6 @@ document.getElementById("exportExcelBtn").addEventListener("click", () => {
   XLSX.writeFile(wb, "customers.xlsx");
 });
 
-// ==========================
-// Go Back Button
-// ==========================
-document.getElementById("goBackBtn").addEventListener("click", () => {
-  window.history.back();
-});
 
 // Init
 renderCustomers();
@@ -273,6 +265,3 @@ document.addEventListener("DOMContentLoaded", () => {
 window.addEventListener("hashchange", () => {
   setActivePage(location.hash.replace("#", "") || "dashboard");
 });
-// ==========================
-// Inventory Management Logic
-// ==========================   

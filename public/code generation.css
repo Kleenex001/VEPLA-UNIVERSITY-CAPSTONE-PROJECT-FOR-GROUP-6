@@ -2,7 +2,7 @@
 :root {
     --primary-color: #4CAF50;
     --secondary-color: #fff;
-    --text-color:#666;
+    --text-color: #333;
     --error-color: #ff4d4d;
     --success-color: #4BB543;
     --button-color: rgba(0, 150, 136, 1);
@@ -21,13 +21,6 @@ body {
     justify-content: left;
     align-items: left;
     overflow-x: hidden;
-}
-.body {
-    overflow-y: scroll;      /* allow vertical scrolling */
-   scrollbar-width: none;
-}
-body::-webkit-scrollbar {
-  display: none;           /* Chrome, Safari */
 }
 .fa-solid a {
     position: inherit;
@@ -78,6 +71,7 @@ body::-webkit-scrollbar {
     padding: 5px;
     transition: 0.3s ease-in-out;
 }
+
 .nav-menu {
     position: fixed;
     top: 0px;
@@ -120,13 +114,15 @@ body::-webkit-scrollbar {
     text-decoration: underline;
 }
 .logo {
+    position: relative;
+    top:10px;
   height: 40px;
-    width: 50px;
+    width: 40px;
 }
 #sign-up {
-    position:relative;
+    position:inherit;
     top:inherit;
-    left:10;
+    left:30px;
     top:inherit;
     color: white;
     background-color: var(--button-color);
@@ -192,8 +188,8 @@ body::-webkit-scrollbar {
     box-shadow: none;
 }
 #sign-in {
-    position:relative;
-    left: 0px;
+    position:inherit;
+    left: 20px;
     top:inherit;
     color: var(--button-color);
     background-color: var(--button-hover-color);
@@ -258,37 +254,42 @@ body::-webkit-scrollbar {
     box-shadow: none;
 }
 
-img {
+#image img {
     width: 100%;
-    height: 100vh;
+    height: 440px;
     border-radius: 10px;
 }
 
 .form-image-container {
     position: relative;
     top:200px;
-    left:100px;
+    left:20%;
     display: flex;
     list-style: none;
     gap: 30px;
     width: 100%;
+    height: 100vh;
 }
 
 .form-container {
     padding: 20px;
     height: 100vh;
-    width: 100%;
+    width: 120%;
 }
 label {
     margin-bottom: 5px;
     font-weight: 600;
     color: #666;
 }
-
+label {
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="tel"] {
-    width: 100%;
+    width: 120%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -298,7 +299,7 @@ input[type="tel"] {
     font-family: 'Poppins', sans-serif;
     color: var(--text-color);
 }
-
+input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus,
 input[type="tel"]:focus {
@@ -307,7 +308,7 @@ input[type="tel"]:focus {
     box-shadow: 0 0 5px var(--button-color);
 }
 ::placeholder {
-    color: var(--text-color);
+    color: #aaa;
 }
 .error {
     color: var(--error-color);
@@ -328,8 +329,8 @@ input[type="tel"]:focus {
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    width: 100%;
     transition: background-color 0.3s ease;
+    width: 120%;
 }
 .submit-btn:hover {
     background-color: var(--button-hover-color);
@@ -362,7 +363,7 @@ p {
     font-size: small;
     text-align: left;
 }
-p a {
+a {
     color: var(--link-color);
     text-decoration: none;
     transition: color 0.3s ease;
@@ -371,7 +372,7 @@ a:hover {
     color: var(--link-hover-color);
     text-decoration: underline;
 }
-p a:active {
+a:active {
     color: var(--link-hover-color);
 }
 a:focus {
@@ -389,34 +390,13 @@ a:visited:active {
 }
 a:visited:focus {
     outline: none;
-    box-shadow: 0 0 5px var(--button-color);
 }
-
 footer {
-    height:50vh;
+    height: 30vh;
 }
 
 
-/* Desktop view (large screens, default styles) */
-@media (min-width: 1025px) {
-    body {
-        flex-direction: row;
-        padding: 0;
-    }
-    .form-image-container {
-        flex-direction: row;
-        gap: 50px;
-        top: 200px;
-        left: 100px;
-    }
-    .form-container {
-        width: 600px;
-    }
-    .signup-image {
-        max-width: 470px;
-        top: 100px;
-    }
-}
+
 
 /* Tablet portrait */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
@@ -464,13 +444,7 @@ footer {
     color: var(--link-hover-color);
     text-decoration: underline;
 }
-.logo {
-    position: relative;
-    top:10px;
-    height: 40px;
-    width: 50px;
-}
-}
+
 #sign-up {
     position:inherit;
     top:inherit;
@@ -478,7 +452,7 @@ footer {
     top:inherit;
     color: white;
     background-color: var(--button-color);
-    padding: 6px 7px;
+    padding: 8px 7px;
     border-radius: 5px;
     border: 1px solid var(--button-color);
     text-decoration: none;
@@ -541,11 +515,11 @@ footer {
 }
 #sign-in {
     position:inherit;
-    left: 90%;
+    left: 20px;
     top:inherit;
     color: var(--button-color);
     background-color: var(--button-hover-color);
-    padding: 4px 5px;
+    padding: 8px 7px;
     border-radius: 5px;
     border: 1px solid var(--button-color);
     text-decoration: none;
@@ -606,17 +580,15 @@ footer {
     box-shadow: none;
 }
 
-.image img {
-    position: relative;
-    top:20px;
+#image img {
     width: 350px;
-    height: 400px;
+    height: 440px;
     border-radius: 10px;
 }
    .form-image-container {
     position: relative;
     top:200px;
-    left:20%;
+    left:10px;
     display: flex;
     list-style: none;
     width: 100%;
@@ -625,7 +597,7 @@ footer {
 .form-container {
     padding: 20px;
     height: 100vh;
-    width: 100%;
+    width: 200%;
 }
 label {
     margin-bottom: 5px;
@@ -636,7 +608,7 @@ label {
 input[type="email"],
 input[type="password"],
 input[type="tel"] {
-    width: 100%;
+    width: 120%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -647,16 +619,18 @@ input[type="tel"] {
     color: var(--text-color);
 }
 .submit-btn {
-    width: 100%;
+    width: 120%;
 }
-footer {
-    height: 10px;
 }
 
 
+/* Tablet landscape */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+   
+}
 
 /* Mobile portrait */
-@media  (max-width: 767px) {
+@media  (max-width: 767px) and (min-width: 320px) and (max-width: 480px) {
     .navbar {
         padding: 5px;
     }
@@ -667,7 +641,6 @@ footer {
        display: block;
        overflow: hidden;
    }
-   
    footer {
        display: none;
    }
@@ -708,7 +681,7 @@ footer {
        flex-direction: column;
        gap: 20px;
        top: 50px;
-       left: 0;
+       left: 10%;
        min-height: 100vh;
    }
    .form-container {
@@ -723,7 +696,7 @@ footer {
 input[type="email"],
 input[type="password"],
 input[type="tel"] {
-    width: 100%;
+    width: 80%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -734,9 +707,6 @@ input[type="tel"] {
     color: var(--text-color);
 }
 .submit-btn {
-    width: 100%;
-}
-footer {
-    height: 30vh;
+    width: 80%;
 }
 }

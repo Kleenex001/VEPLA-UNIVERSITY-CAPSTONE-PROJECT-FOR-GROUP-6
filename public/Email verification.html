@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In</title>
-    <link rel="stylesheet" href="sign in.css">
+    <link rel="stylesheet" href="Email verification.css">
+    <title>Reset Password</title>
     <link rel="icon" type="image/x-icon" href="Assets/logo.png" width="100px" height="100px">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    </head>
 </head>
 <body>
-      <header>
+    <header>
             <nav class="navbar ">
-                <ul class="nav-menu">
+               <ul class="nav-menu">
                     
                     <li><a href="index.html"><img src="Assets/LOGO-TRANS 1.png" alt="Logo" class="logo"></a></li>
                     <li class="nav-item"><a href="index.html" class="spacer">Home</a></li>
@@ -49,36 +48,62 @@
                 </div>
             </nav>
         </header>
-    <ul class="form-image-container">
-        <li class="image">
-           <img src="Assets/signup and sign in.jpg" alt="Sign Up Image" class="signup-image">
-        </li>
-    <li>
-        <div class="form-container">
-            <h1>Sign In</h1>
-            <br>
-    <form id="signinForm">
-        <div class="form-group">
-        <label for="email">Email:</label><br>
-        <input type="email" type="tel" id="email" name="email" placeholder="Enter Email">
-        <div id="emailError" class="error"></div>
-        </div>
-        <div class="form-group">
-            <br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" placeholder="Enter Password">
-        <div id="passwordError" class="error"></div>
-        </div>
-        <br><br>
-        <button type="submit" class="submit-btn">Sign In</button><br>
-        <br>
-        <p>Don't have an account? <a href="sign up.html">sign up here</a> or <a href="code generation.html">Reset Password</a></p>
-    </form>
-    </div>
+         <ul class="form-image-container">
+    <li id="image">
+      <img src="Assets/signup and sign in.jpg" alt="Sign Up Image" class="signup-image">
     </li>
-    </ul>
-    <script src="sign in.js"></script>
-    <footer>
-    </footer>
+    <li>
+      <div class="container">
+        <h2 style="font-size: 1.2rem; width: 100%;">Enter the code sent to your email</h2>
+        <br>
+        <form id="verifyForm">
+          <div class="form-group">
+            <label for="otp">Enter Code:</label><br>
+            <input type="text" id="otp" name="otp" placeholder="Enter verification code">
+            <div id="otpError" class="error"></div>
+          </div>
+          <br>
+          <button type="submit" class="submit-btn">Verify Email</button>
+          <p id="message" style="margin-top: 10px;"></p>
+          <br>
+        </form>
+      </div>
+    </li>
+  </ul>
+
+  <script>
+    const form = document.getElementById('verifyForm');
+    const otpError = document.getElementById('otpError');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      otpError.textContent = '';
+      message.textContent = '';
+
+      const enteredOTP = document.getElementById('otp').value;
+
+      try {
+        // Mock
+        // API call:
+       
+        // Fake response (for demo)
+        const result = { success: enteredOTP === "123456" };
+
+        if (result.success) {
+          message.style.color = "green";
+          message.textContent = "Email verified successfully!";
+          setTimeout(() => {
+            window.location.href = "reset password.html";
+          }, 2000);
+        } else {
+          otpError.textContent = "Invalid or expired code. Please try again.";
+        }
+      } catch (error) {
+        console.error(error);
+        otpError.textContent = "⚠️ Server error. Please try again later.";
+      }
+    });
+  </script>
 </body>
 </html>

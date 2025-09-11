@@ -132,9 +132,9 @@ body {
 }
 #logo img {
   position: relative;
-  top: 30px;
-  left: 30px;
-  width: 60px;
+  top: 25%;
+  left: 5%;
+  width: 10%;
 }
 #sign-up {
     position:relative;
@@ -1179,17 +1179,17 @@ background-color: #009688;
 @media  (max-width: 767px) and (min-width: 320px) and (max-width: 480px) {
   
   .navbar {
-        padding: 5px;
+        padding: 5%;
     }
  
    .fa-solid a {
     position: absolute;
-    top: 38px;
+    top: 40%;
     left: 80%;
        display: block;
        overflow: hidden;
-       width: 50px;
-       height: 50px;
+       width: 10%;
+       height: 35%;
    }
   
    .fa-solid a :hover {
@@ -1197,8 +1197,8 @@ background-color: #009688;
    }
    .side-bar {
     position: fixed;
-    top:0px;
-    left: 250px;
+    top:0%;
+    left: 55%;
     height: 100vh;
     width: 250px;
     z-index: 1000;
@@ -1247,36 +1247,36 @@ background-color: #009688;
    }
 
    .form-image-container {
-    margin-top: 50px;
+    margin-top: 5%;
        flex-direction: column;
-       gap: 20px;
-       top: 50px;
-       left: 0;
+       gap: 2%;
+       top: 5%;
+       left: 0%;
    }
    .form-container {
        width: 100%;
        min-height: 100vh;
-       padding: 15px;
+       padding: 5%;
    }
    #image img {
        display: none;
    }
    #logo img {
   position: absolute;
-  top: 30px;
-  left: 10px;
-  width: 50px;
+  top: 5%;
+  left: 5%;
+  width: 20%;
 }
 .user-count {
   position: relative;
-  left: -10px;
+  left: -5%;
 }
 .user-stat {
   position: relative;
   top:100px;
-  left: 40%;
- width: 80%;
- height: 8vh;
+  left: 45%;
+ width: 90%;
+ height: 8%;
  font-size: 0.9rem;
 }
 
@@ -1290,7 +1290,7 @@ background-color: #009688;
 }
 
 .hero h1 {
-  font-size: 25px;
+  font-size: 1.7rem;
   color: #000; /* white text */
 }
 
@@ -1302,13 +1302,13 @@ background-color: #009688;
 
 .hero-buttons {
   flex-direction: column;
-  margin-top: 30px;
+  margin-top: 10%;
 }
 .btn-primary, .btn-secondary {
     color: var(--button-color);
     background-color: var(--button-hover-color);
-    padding: 10px 15px;
-    border-radius: 5px;
+    padding: 3% 10%;
+    border-radius: 5%;
     border: 1px solid var(--button-color);
     text-decoration: none;
     
@@ -1325,52 +1325,55 @@ background-color: #009688;
 
 .cta-section {
   position: relative;
-  top: 290px;
+  top: 5%;
   text-align: center;
-  border-radius: 12px;
-  max-width: 800px;
+  border-radius: 12%;
+  width: 100%;
   margin: 0 auto 60px;
 }
 .cta-container h2 {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
 .cta-container p {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
 #newsletter-list {
   position: relative;
-  top:-20px;
-  right: 220px;
+  top:-20%;
+  right: 60%;
   display: flex;
   flex-direction: column;
 }
 .newsLetter-form {
-  width: 250px;
+  width: 70%;
 }
 .info-item {
   position: inherit;
-  right: 130px;
+  right: 35%;
 }
 
 .media-icon {
   position: relative;
-  left: 270px;
-  align-items: center;
+  top:-10%;
+  left: 75%;
+  gap: 20px;
 }
-
+ .media-icon a {
+  margin-inline: 10px;
+ }
 .cta-container {
   position: relative;
-  top: -350px;
+  top: 100%;
   text-align: center;
-  border-radius: 12px;
-  width: 550px;
+  border-radius: 5%;
+  width: 100%;
 }
 
 .footer-column a {
   display: block;
   margin: 12px 0;
-  font-size: 15px;
+  font-size:1.05rem;
   color: #ffffff;
   text-decoration: none;
   transition: color 0.3s ease;
@@ -1388,45 +1391,45 @@ footer{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   gap: 1px;
 }
 
 .footer-column {
   flex: 1;
-  min-width: 220px;
+  min-width: 100%;
 }
 
 .footer-column h3 {
-  font-size: 18px;
+  font-size: 1.2rem;
   font-weight: bold;
 }
 
 .footer-column p {
-  margin-left: -5px;
+  margin-left: -2%;
   display: flex;
   align-items: center;
-  font-size: 13px;
+  font-size: 0.8rem;
 }
 
 .footer-column i {
   margin-right: 10px;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 /* Social Icons */
 .social-icons {
-  margin-top: 25px;
+  margin-top: 10%;
   display: flex;
-  margin-left: -5px;
+  margin-left: -2%;
   
 }
 
 .social-icons a {
   color: #ffffff;
-  margin-right: 15px;
-  font-size: 18px;
+  margin-right: 5%;
+  font-size: 1.2rem;
   transition: color 0.3s ease;
 }
 
@@ -1434,7 +1437,8 @@ footer{
   color: #004d40;
 }
 .footer-logo {
-  margin-left: -25px;
+  margin-left: -5%;
+  width: 30%;
 }
 
 /* Bottom section */
@@ -1449,11 +1453,11 @@ footer{
 .footer-bottom hr {
   border: 0;
   border-top: 1px solid white;
-  margin-bottom: 15px;
+  margin-bottom: 5%;
 }
 
 .footer-bottom p {
-  font-size: 14px;
+  font-size: 1rem;
   margin: 0;
 }
 }
