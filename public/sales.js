@@ -70,6 +70,17 @@ document.addEventListener("DOMContentLoaded", () => {
     updateChart();
   });
 
+  // Toast Function
+  function showToast(message, type = "success") {
+    const toast = document.createElement("div");
+    toast.className = `toast ${type}`;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => {
+      toast.remove();
+    }, 3000);
+  }
+
   // Modal Functions
   addSaleBtn.addEventListener("click", () => {
     modal.style.display = "block";
@@ -109,6 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateDashboard();
     addSaleForm.reset();
     modal.style.display = "none";
+    showToast("✅ Sale added successfully!");
   });
 
   // Delete Sale
@@ -116,6 +128,18 @@ document.addEventListener("DOMContentLoaded", () => {
     salesData = salesData.filter((sale) => sale.id !== id);
     localStorage.setItem("salesData", JSON.stringify(salesData));
     updateDashboard();
+    showToast("🗑️ Sale deleted successfully", "info");
+  }
+
+  // Mark Sale as Completed
+  function markAsCompleted(id) {
+    const sale = salesData.find((s) => s.id === id);
+    if (sale && sale.status === "pending") {
+      sale.status = "completed";
+      localStorage.setItem("salesData", JSON.stringify(salesData));
+      updateDashboard();
+      showToast("✅ Sale marked as completed!");
+    }
   }
 
   // Update KPI Cards
@@ -148,6 +172,13 @@ document.addEventListener("DOMContentLoaded", () => {
         <td>${sale.customerName}</td>
         <td>${sale.status}</td>
         <td>
+          ${
+            sale.status === "pending"
+              ? `<button class="btn complete" data-id="${sale.id}">
+                   <i class="fa fa-check"></i> Complete
+                 </button>`
+              : ""
+          }
           <button class="btn delete" data-id="${sale.id}">
             <i class="fa fa-trash"></i> Delete
           </button>
@@ -160,6 +191,13 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".btn.delete").forEach((btn) => {
       btn.addEventListener("click", () =>
         deleteSale(parseInt(btn.dataset.id))
+      );
+    });
+
+    // Attach complete handlers
+    document.querySelectorAll(".btn.complete").forEach((btn) => {
+      btn.addEventListener("click", () =>
+        markAsCompleted(parseInt(btn.dataset.id))
       );
     });
   }

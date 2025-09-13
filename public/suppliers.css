@@ -16,11 +16,12 @@
 
 /* Reset */
 *{ box-sizing: border-box; margin:0; padding:0; }
-html,body{ height:100%; }
+html,body{ min-height:100vh; }
 body{
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: var(--text);
   background: var(--bg);
+  min-height: 100vh;
 }
 
 
@@ -367,7 +368,9 @@ footer {
   display: flex;
   flex-direction: column;
 }
-
+body {
+  min-height: 100vh;
+}
   
   .page-layout {
     display: flex;
@@ -384,7 +387,7 @@ footer {
 
 }
 
- .btn.primary {
+      .btn.primary {
       background:#0ea373;
       color: #fff;
       padding: 5px 3px;
@@ -421,10 +424,10 @@ footer {
       background: #b02a37;
     }
     .toolbar input[type="search"],
-.toolbar select {
-  padding: 0.3rem 0.5rem;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
+    .toolbar select {
+    padding: 0.3rem 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
     font-size: 0.7rem;
     width: 100px;
 }
