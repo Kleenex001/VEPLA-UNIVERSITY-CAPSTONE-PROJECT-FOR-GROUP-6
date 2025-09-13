@@ -1,6 +1,6 @@
-// =========================
+// 
 // Delivery Management Logic
-// =========================
+// 
 
 // Data store
 let deliveries = [];
@@ -143,9 +143,9 @@ function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-// =========================
+// 
 // Event Listeners
-// =========================
+// 
 
 // Open add delivery modal
 document.getElementById("addDeliveryBtn").addEventListener("click", () => {

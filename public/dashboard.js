@@ -1,20 +1,65 @@
-
-// Fetch Data from Backend API
-
+// Fetch Data from Backend API (with dummy fallback)
 async function fetchDataFromAPI() {
   try {
     const res = await fetch("/api/dashboard"); // replace with your endpoint
     if (!res.ok) throw new Error("Failed to fetch dashboard data");
     return await res.json();
   } catch (err) {
-    console.error("Dashboard fetch error:", err);
-    return null;
+    console.warn("Dashboard fetch error, using dummy data:", err);
+
+    // Dummy data for simulation (Sales Analytics + Overdue Payments)
+    return {
+      kpis: {
+        totalSales:"3000",
+        totalOwed: "40000",
+        totalDelivery:"3000",
+        salesTrend: {
+          labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          data: [1200, 1500, 1800, 1700, 2200, 2500, 2000],
+        },
+        owedTrend: {
+          labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          data: [400, 350, 500, 450, 600, 550, 300],
+        },
+        deliveryTrend: {
+          labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          data: [20, 25, 18, 22, 28, 30, 24],
+        },
+      },
+      sales: {
+        monthly: {
+          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+          data: [1200, 2300, 1800, 2500, 3100, 4000],
+        },
+        yearly: {
+          labels: ["2019", "2020", "2021", "2022", "2023", "2024"],
+          data: [12000, 15000, 18000, 22000, 30000, 40000],
+        },
+      },
+      payments: {
+        monthly: {
+          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+          data: [400, 600, 300, 800, 500, 700],
+        },
+        yearly: {
+          labels: ["2019", "2020", "2021", "2022", "2023", "2024"],
+          data: [3000, 4500, 5000, 7000, 8500, 10000],
+        },
+      },
+      quickStats: ["Pending delivery:", "Pending purchases: ", "Recent purchases:"],
+      pendingOrders: ["", ""],
+      lowStock: ["", ""],
+      topCustomers: [
+        { name: "", amount: "" },
+        { name: "", amount: "" },
+        { name: "", amount: "" },
+      ],
+    };
   }
 }
 
 
 // Chart.js Helpers
-
 function createLineChart(ctx, labels, data, color) {
   return new Chart(ctx, {
     type: "line",
@@ -35,7 +80,7 @@ function createLineChart(ctx, labels, data, color) {
     options: {
       responsive: true,
       plugins: { legend: { display: false } },
-      scales: { x: { display: false }, y: { display: false } },
+      scales: { x: { display: true }, y: { display: true } }, // keep axes visible
     },
   });
 }
@@ -44,35 +89,12 @@ let salesChart, paymentChart, sparkSales, sparkOwed, sparkDelivery;
 
 
 // Render Functions
-
 function updateKPIs(kpis) {
   document.getElementById("totalSales").textContent = kpis.totalSales.toLocaleString();
   document.getElementById("totalOwed").textContent = kpis.totalOwed.toLocaleString();
   document.getElementById("totalDelivery").textContent = kpis.totalDelivery.toLocaleString();
 
-  // Sparklines
-  if (sparkSales) sparkSales.destroy();
-  if (sparkOwed) sparkOwed.destroy();
-  if (sparkDelivery) sparkDelivery.destroy();
-
-  sparkSales = createLineChart(
-    document.getElementById("sparkSales").getContext("2d"),
-    kpis.salesTrend.labels,
-    kpis.salesTrend.data,
-    "#009879"
-  );
-  sparkOwed = createLineChart(
-    document.getElementById("sparkOwed").getContext("2d"),
-    kpis.owedTrend.labels,
-    kpis.owedTrend.data,
-    "#ff5722"
-  );
-  sparkDelivery = createLineChart(
-    document.getElementById("sparkDelivery").getContext("2d"),
-    kpis.deliveryTrend.labels,
-    kpis.deliveryTrend.data,
-    "#2196f3"
-  );
+  
 }
 
 function updateCharts(sales, payments) {
@@ -82,6 +104,7 @@ function updateCharts(sales, payments) {
   if (salesChart) salesChart.destroy();
   if (paymentChart) paymentChart.destroy();
 
+  // Default view = monthly
   salesChart = createLineChart(salesCtx, sales.monthly.labels, sales.monthly.data, "#009879");
   paymentChart = createLineChart(paymentCtx, payments.monthly.labels, payments.monthly.data, "#ff9800");
 
@@ -122,7 +145,6 @@ function updateSidebar(data) {
 
 
 // Main Renderer
-
 async function renderDashboard() {
   const data = await fetchDataFromAPI();
   if (!data) return;
@@ -134,5 +156,4 @@ async function renderDashboard() {
 
 
 // Init
-
 document.addEventListener("DOMContentLoaded", renderDashboard);

@@ -470,14 +470,14 @@ footer {
     top: 5%;
     left: 17%;
   background: #fff;
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 12px;
   max-width:50%;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 .kpis {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 2fr));
     padding: 0.5rem;
     font-size: 10px;
 }

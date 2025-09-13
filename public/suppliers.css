@@ -362,7 +362,7 @@ footer {
      align-items: center;
   }
   .content{
-  margin-left: 20px;       /* keep main clear of fixed sidebar */
+  margin-left: 1px;       /* keep main clear of fixed sidebar */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -428,21 +428,22 @@ footer {
     font-size: 0.7rem;
     width: 100px;
 }
-.modal-content {
+.modal-content .model {
     position: relative;
-    top: 5%;
+    top: -5%;
     left: 17%;
-  background: #fff;
-  padding: 2rem;
-  border-radius: 12px;
-  max-width:50%;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    background: #fff;
+    padding: 1rem;
+    border-radius: 12px;
+    width:50%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 .kpis {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 2fr));
-    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
     font-size: 10px;
+    width: 25rem;
 }
 .kpi i {
   font-size: 1rem;

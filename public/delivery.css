@@ -510,7 +510,7 @@ footer {
     flex-direction: column;
   }
   .content {
-  margin-left: 20px; /* offset for sidebar */
+  margin-left: 1px; /* offset for sidebar */
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -525,10 +525,10 @@ footer {
 }
 .modal .modal-content{
     position: relative;
-    top: 5%;
+    top: -5%;
     left: 5%;
-  width: 65%;
-  max-width: 95vw;
+  width: 60%;
+  height: 55%;
   background:#fff;
   border-radius: 14px;
   box-shadow: black;
@@ -537,14 +537,14 @@ footer {
  .btn.primary {
       background:#0ea373;
       color: #fff;
-      padding: 5px 3px;
-      border: none;
+      padding: 3px 5px;
       border-radius: 5px;
       cursor: pointer;
-      font-size: 12px;
+      margin-right: 0.8rem;
+      font-size: 10px;
       font-weight: 600;
       align-items: center; 
-      width: 90px;
+      width: 70px;
       transition: background 0.3s ease;
     }
     .btn.primary:hover {
@@ -552,5 +552,13 @@ footer {
     }
     .topbar img {
  display: block;
+}
+.toolbar select,
+.toolbar input[type="search"] {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 0.9rem;
+  width: 8rem;
 }
 }

@@ -210,4 +210,3 @@ window.addEventListener("hashchange", () => {
   setActivePage(location.hash.replace("#", "") || "dashboard");
 });
 
-// ==================== Modal handling ====================

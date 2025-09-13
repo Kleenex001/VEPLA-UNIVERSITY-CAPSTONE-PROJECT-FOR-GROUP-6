@@ -305,9 +305,8 @@ body {
   color: #111827;
 }
 
-/* =========================
-   STATS SIDEBAR
-========================= */
+/*STATS SIDEBAR*/
+
 .stats .card {
   margin-bottom: 1rem;
 }
@@ -469,7 +468,7 @@ footer {
     flex-direction: column;
   }
   .content {
-  margin-left: 20px; /* offset for sidebar */
+  margin-left: 1px; /* offset for sidebar */
  
 }
 .grid-two {
@@ -481,46 +480,55 @@ footer {
 .modal .modal-content{
     position: relative;
     top: 5%;
-    left: 20%;
-  width: 65%;
-  max-width: 95vw;
+    left: 5%;
+  width: 90%;
   background:#fff;
   border-radius: 14px;
   box-shadow: black;
-  padding: 16px;
+  padding: 1rem;
 }
+
 .kpis {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    display: flex;
+    flex-direction: column;
     padding: 0.7rem;
     font-size: 10px;
+    margin-right: 10px;
 }
 .kpi i {
   font-size: 1rem;
   color: #10b981;
 }
 
-.toolbar select,
-.toolbar input[type="search"] {
-  padding: 0.6rem 0.8rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.5rem;
-  font-size: 0.7rem;
-  width: 100%;
-}
+
 
 .btn.primary {
     position: relative;
+    top: 0px;
+  background: #0e8a70;
+  color: #fff;
+  padding: 0.5rem 0.8rem;
+  border: none;
+  margin-left: 145px;
+  border-radius: 0.5rem;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: 0.2s;
+  width: 7rem ;
+}
+#addCustomerBtn {
+   position: relative;
     top: -30px;
   background: #0e8a70;
   color: #fff;
   padding: 0.5rem 0.8rem;
   border: none;
-  margin-left: 120px;
+  margin-left: 12.5rem;
   border-radius: 0.5rem;
   font-size: 0.7rem;
   cursor: pointer;
   transition: 0.2s;
+  width: 7rem ;
 }
 .btn.secondary {
   background: #f3f4f6;
@@ -537,5 +545,12 @@ footer {
 }
 .topbar img {
  display: block;
+}
+.toolbar select,
+.toolbar input[type="search"] {
+  padding: 0.5rem 0.8rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
 }
 }
