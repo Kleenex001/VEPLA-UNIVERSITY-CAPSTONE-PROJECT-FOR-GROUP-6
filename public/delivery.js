@@ -46,9 +46,9 @@ let deliveryOverviewChart = new Chart(ctxDel, {
   }
 });
 
-// =========================
+
 // Functions
-// =========================
+
 
 // Render deliveries
 function renderDeliveries() {
