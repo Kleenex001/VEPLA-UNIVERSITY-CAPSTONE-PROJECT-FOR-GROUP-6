@@ -1361,13 +1361,13 @@ background-color: #009688;
 }
 .info-item {
   position: relative;
-  left: 0%;
+  right: 24rem;
 }
 
 .media-icon {
   position: relative;
   top:-10%;
-  left: 94%;
+  left: 15px;
   gap: 20px;
   text-align: center;
 }
