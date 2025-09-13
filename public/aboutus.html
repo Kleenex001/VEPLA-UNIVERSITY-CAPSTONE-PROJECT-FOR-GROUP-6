@@ -16,15 +16,15 @@
   <!-- Navbar inside Hero -->
   <header>
                 <nav class="navbar">
-              <div id="logo"><a href="index.html"><img src="Assets/LOGO-TRANS 1.png" alt="Logo"></a></div>
+              <div id="logo"><a href="index.html"><img src="Assets/LOGO-11 1.svg" alt="Logo"></a></div>
                 <ul class="nav-menu">
                     <li class="nav-item"><a href="index.html" class="spacer">Home</a></li>
                     <li class="nav-item"><a href="features.html" class="spacer">Features</a></li>
                     <li class="nav-item"><a href="pricing.html" class="spacer">Pricing</a></li>
                     <li class="nav-item"><a href="aboutus.html" class="spacer">About Us</a></li>
                     <li class="nav-item"><a href="contactus.html" class="spacer">Contact Us</a></li>
-                    <li class="nav-item"><a href="sign in.html" id="sign-in">Sign In</a></li>
-                    <li class="nav-item"><a href="sign up.html" id="sign-up" >Sign Up</a></li>
+                    <li class="nav-item"><a href="sign in.html" id="sign-in">Login</a></li>
+                    <li class="nav-item"><a href="sign up.html" id="sign-up" >Register</a></li>
                     <li onclick="toggleSidebar()" class="fa-solid"><a href="#" title="Open menu"><i class="fa-solid fa-bars"></i></a></li>
                 </ul>
                 <!-- Sidebar for small screens -->
@@ -46,8 +46,8 @@
                      <li><a href="pricing.html">Pricing</a></li>
                      <li><a href="about.html">About Us</a></li>
                      <li><a href="contactus.html">Contact Us</a></li>
-                     <li><a href="sign in.html">Sign In</a></li>
-                     <li><a href="sign up.html">Sign Up</a></li>
+                     <li><a href="sign in.html">Login</a></li>
+                     <li><a href="sign up.html">Register</a></li>
                     </ul>
                 </div>
             </nav>
@@ -85,7 +85,7 @@ Our mission is simple: give every small shop owner an easy, affordable tool to r
 <!-- next Section -->
 <section class="image-section">
   <div class="image-container">
-    <img src="Assets/Frame 2147258789.png" alt="Hero Background" loading="lazy">
+    <img src="Assets/Frame 2147258789.png" alt="Hero Background">
     <div class="image-text">
       <div class="text-block">
         <h2>Our Mission</h2>
@@ -172,38 +172,106 @@ Our mission is simple: give every small shop owner an easy, affordable tool to r
   </div>
 </section>
 
+
 <!-- Newsletter / Contact Section -->
 <section class="newsletter-section">
   <div class="newsletter-container">
     <h2>We Would Love to Hear From You</h2>
     <p>Fill out the form below and our team will get back to you shortly.</p>
 
-    <form class="newsletter-form">
+    <form class="newsLetter-form">
       <!-- Full Name -->
-      <label for="name">Full Name</label>
+      <label for="name">Name</label>
       <input type="text" id="name" name="name" placeholder="Enter your full name">
+      <div class="error" id="nameError"></div>
 
       <!-- Email -->
       <label for="email">Email Address</label>
       <input type="email" id="email" name="email" placeholder="Enter your email">
-
-      <!-- Phone Number -->
-      <label for="phone">Phone Number</label>
-      <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
-
-      <!-- Business Name -->
-      <label for="business">Business Name</label>
-      <input type="text" id="business" name="business" placeholder="Enter your business name">
+      <div class="error" id="emailError"></div>
 
       <!-- Comments -->
       <label for="comments">Comments</label>
       <textarea id="comments" name="comments" rows="4" placeholder="Enter your comments"></textarea>
-
+      <div class="error" id="commentsError"></div>
+      <div id="successMsg">Form Submitted!</div>
       <!-- Submit Button -->
       <button type="submit">Submit</button>
+      
     </form>
   </div>
+
+  <script>
+    const newsLetterForm = document.getElementsByClassName("newsLetter-form")[0];
+    const successMsg = document.getElementById("successMsg");
+
+    newsLetterForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+    //get form values
+    const name=document.getElementById("name");
+    const email=document.getElementById("email");
+    const comments=document.getElementById("comments");
+
+    //error handling
+
+
+    const errors = {
+      name: document.getElementById("nameError"),
+      email: document.getElementById("emailError"),
+      comments: document.getElementById("commentsError"),
+    };
+
+    // Form validation
+    let isValid=true;
+    //name validation
+    if (name.value.trim() === "" || name.value.length < 3) {
+      nameError.textContent= "Enter your full name";
+      nameError.style.display="block";
+      name.classList.add("input-error");
+      isValid=false;
+    } else {
+      nameError.textContent="";
+      nameError.style.display="none";
+      name.classList.remove("input-error");
+    }
+    //email validation
+    if (email.value.includes("@") && email.value.includes(".com")) {
+      emailError.textContent = "";
+      emailError.style.display = "none";
+      email.classList.remove("input-error");
+    } else {
+      emailError.textContent = "Enter a valid email address";
+      emailError.style.display = "block";
+      email.classList.add("input-error");
+      isValid = false;
+    }
+    //comments validation
+    if (comments.value.trim() === "") {
+      commentsError.textContent = "Enter your comments";
+      commentsError.style.display = "block";
+      comments.classList.add("input-error");
+      isValid = false;
+    } else {
+      commentsError.style.display = "none";
+      comments.classList.remove("input-error");
+    }
+
+    if (isValid) {
+      successMsg.style.display = "block";
+      // Clear form fields
+      name.value = "";
+      email.value = "";
+      comments.value = "";
+      newsLetterForm.reset();
+    } else {
+      successMsg.style.display = "none";
+    }
+  });
+
+  </script>
 </section>
+
+
 
 
 <!-- Call To Action Section -->
@@ -223,7 +291,7 @@ Our mission is simple: give every small shop owner an easy, affordable tool to r
 
 <!-- Footer Section -->
 <footer class="footer">
-  <img src="Assets/Frame 11.svg" alt="Company Logo" width="150" class="footer-logo">
+  <img src="Assets/LOGO-11 1.svg" alt="Logo" class="footer-logo">
   <div class="footer-container">
     
     <!-- Contact Column -->

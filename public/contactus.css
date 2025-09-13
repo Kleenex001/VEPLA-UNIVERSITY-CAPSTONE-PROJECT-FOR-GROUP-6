@@ -19,6 +19,8 @@
 
 body {
   font-family: Arial, sans-serif;
+  min-width: 100vw;
+  min-height: 100vh;
   overflow-x: hidden;
 }
 .fa-solid a {
@@ -132,14 +134,14 @@ body {
 }
 #logo img {
   position: relative;
-  top: 25%;
-  left: 5%;
-  width: 10%;
+  top: 20px;
+  left: 2%;
+  width: 7%;
 }
 #sign-up {
     position:relative;
     top:inherit;
-    left:450px;
+    left:23rem;
     top:inherit;
     color: var(--button-color);
     background-color: var(--button-hover-color);
@@ -206,7 +208,7 @@ body {
 }
 #sign-in {
     position:relative;
-    left: 450px;
+    left: 23rem;
     top:inherit;
     color: var(--button-hover-color);
     background-color: transparent;
@@ -360,11 +362,14 @@ body {
 
 /* Newsletter Section */
 #newsletter-list {
+  position: relative;
+  left: 5%;
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   width: 100%;
+  gap: 4rem;
 }
 
 .newsletter-section {
@@ -460,7 +465,7 @@ body {
 /* Contact Info */
 .contact-info {
   position: relative;
-  top: 40px;
+  top: 0;
   left: 400px;
 }
 info-item {             
@@ -491,7 +496,6 @@ info-item {
 /* Social Icons */
 .social-icons {
   position: relative;
-  top: 20px;
   left: 400px;
   font-size: 1rem;
   color: #333;
@@ -711,7 +715,7 @@ details[open] summary::after {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  max-width: 1200px;
+  width: 100vw;
   margin: 0 auto;
   gap:50px
 }
@@ -739,7 +743,12 @@ details[open] summary::after {
   margin-right: 10px;
   font-size: 16px;
 }
-
+.footer-logo {
+  position: relative;
+  top: 0%;
+  right: 7.5rem;
+  width:7.5rem;
+}
 /* Social Icons */
 .social-icons {
   margin-top: 25px;
@@ -843,28 +852,28 @@ body {
 .spacer {
   position: relative;
   top: 10px;;
-  left:100px;
+  left:80px;
 }
 #logo img {
   position: relative;
-  top: 40px;
-  left: 0px;
+  top: 35px;
+  left: 10px;
   width: 70px;
 }
 #sign-up {
     position:relative;
     top: 10px;
-    left:86px;
-    color: var(--button-hover-color);
+    left:5.5rem;
+    color: var(--button-color);
     background-color: var(--button-color);
-    padding: 5px 6px;
+    padding: 5px 7px;
     border-radius: 5px;
     border: 1px solid var(--button-color);
     text-decoration: none;
 }
 #sign-up:hover {
     background-color: transparent;
-    color: var(--button-color);
+    color: var(--button-hover-color);
     border: 1px solid var(--button-color);
     cursor: pointer;
 }
@@ -891,7 +900,7 @@ body {
     box-shadow: none;
 }
 #sign-up:visited {
-    color: var(--button-color);
+    color: var(--button-hover-color);
 }
 #sign-up:visited:hover {
     color: var(--button-hover-color);
@@ -920,11 +929,11 @@ body {
 }
 #sign-in {
     position:relative;
-    left: 95px;
+    left: 6rem;
     top:10px;
     color: var(--button-color);
     background-color: var(--button-hover-color);
-    padding: 5px 8px;
+    padding: 5px 7px;
     border-radius: 5px;
     border: 1px solid var(--button-color);
     text-decoration: none;
@@ -957,7 +966,7 @@ body {
     box-shadow: none;
 }
 #sign-in:visited {
-    color: var(--button-hover-color);
+    color: var(--button-color);
 }
 #sign-in:visited:hover {
     color: var(--button-color);
@@ -1009,7 +1018,7 @@ body {
   font-weight: bold;
   padding: 8px 14px;
   border-radius: 6px;
-  font-size: 1rem;
+  font-size: 1.1rem;
   display: flex;
   align-items: center;   /* ✅ keeps number vertically centered */
   justify-content: center;
@@ -1176,7 +1185,7 @@ background-color: #009688;
 }
 }
 /* Mobile portrait */
-@media  (max-width: 767px) and (min-width: 320px) and (max-width: 480px) {
+@media  (max-width: 767px) and (min-width: 320px){
   
   .navbar {
         padding: 5%;
@@ -1185,7 +1194,7 @@ background-color: #009688;
    .fa-solid a {
     position: absolute;
     top: 40%;
-    left: 80%;
+    left: 75%;
        display: block;
        overflow: hidden;
        width: 10%;
@@ -1261,11 +1270,11 @@ background-color: #009688;
    #image img {
        display: none;
    }
-   #logo img {
-  position: absolute;
-  top: 5%;
-  left: 5%;
-  width: 20%;
+ #logo img {
+  position: relative;
+  top: 10px;
+  left: 5px;
+  width: 60px;
 }
 .user-count {
   position: relative;
@@ -1273,10 +1282,10 @@ background-color: #009688;
 }
 .user-stat {
   position: relative;
-  top:100px;
+  top:0%;
   left: 45%;
  width: 90%;
- height: 8%;
+ height: 9%;
  font-size: 0.9rem;
 }
 
@@ -1284,18 +1293,19 @@ background-color: #009688;
 .hero-content {
   position: relative;
   left: 50%;
-  top: -60px;
+  top: -12rem;
   max-width: 100%;
   text-align: center;
+  min-height: 100vh;
 }
 
 .hero h1 {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   color: #000; /* white text */
 }
 
 .hero p {
-  font-size: 1.1rem;
+  font-size: 1rem;
   text-align: center;
   color: #000; /* softer white for readability */
 }
@@ -1340,24 +1350,26 @@ background-color: #009688;
 
 #newsletter-list {
   position: relative;
-  top:-20%;
-  right: 60%;
+  left: 0%;
   display: flex;
   flex-direction: column;
 }
 .newsLetter-form {
+  position: relative;
+  left: 0%;
   width: 70%;
 }
 .info-item {
-  position: inherit;
-  right: 35%;
+  position: relative;
+  left: 0%;
 }
 
 .media-icon {
   position: relative;
   top:-10%;
-  left: 75%;
+  left: 94%;
   gap: 20px;
+  text-align: center;
 }
  .media-icon a {
   margin-inline: 10px;
@@ -1438,7 +1450,7 @@ footer{
 }
 .footer-logo {
   margin-left: -5%;
-  width: 30%;
+  width: 25%;
 }
 
 /* Bottom section */

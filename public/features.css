@@ -671,9 +671,15 @@ background-color: #009688;
 .footer {
   background-color: #009688;
   color: #ffffff;
-  padding: 50px 20px;
+  padding: 20px 20px;
 }
 
+.footer-logo {
+  position: relative;
+  top: 0%;
+  left: 1rem;
+  width:7.5rem;
+}
 
 .footer-column a {
   display: block;
@@ -694,7 +700,8 @@ background-color: #009688;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  max-width: 1200px;
+  margin: 0 auto;
+   min-width: 100vw;
   margin: 0 auto;
   gap:50px
 }
