@@ -1283,7 +1283,7 @@ background-color: #009688;
 }
 
 /* Mobile portrait */
-@media  (max-width: 767px) and (min-width: 320px) and (max-width: 480px) {
+@media  (max-width: 767px) and (min-width: 320px) {
   
   .navbar {
         padding: 5px;
@@ -1494,7 +1494,7 @@ background-color: #009688;
 }
 .testimonials {
   position: relative;
-  top: 180px;
+  top: 19rem;
   left: 0px;
   background-color: #E0F2F1;
   padding: 60px 20px;
@@ -1518,7 +1518,7 @@ background-color: #009688;
 }
 .testimonial-intro {
   position: relative;
-  top: 230px;
+  top: 20rem;
 }
 .testimonial-card {
   background: #fff;
@@ -1578,7 +1578,7 @@ background-color: #009688;
 }
 .faq-section {
   position: relative;
-  top:150px;
+  top:17rem;
 }
 .faq-section h2 {
   font-size: 22px;
@@ -1590,14 +1590,14 @@ background-color: #009688;
 }
 .cta-container {
   position: relative;
-  top: 70px;
+  top: 12rem;
   text-align: center;
   border-radius: 12px;
   max-width: 800px;
   margin: 0 auto 60px;
 }
 .cta-container h2 {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 .cta-container p {
   font-size: 0.8rem;
@@ -1607,6 +1607,8 @@ background-color: #009688;
   background-color: #009688;
   color: #ffffff;
   padding: 50px 20px;
+  position: relative;
+  top: 10rem;
 }
 
 
