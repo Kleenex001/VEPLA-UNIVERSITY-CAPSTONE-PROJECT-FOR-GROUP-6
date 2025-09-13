@@ -19,6 +19,9 @@
 
 body {
   font-family: Arial, sans-serif;
+  overflow-x: hidden;
+  min-width: 100vw;
+  min-height: 100vh;
 }
 .fa-solid a {
     position: inherit;
@@ -1269,7 +1272,7 @@ background-color: #009688;
 }
 
 /* Mobile portrait */
-@media  (max-width: 767px) and (min-width: 320px) and (max-width: 480px) {
+@media  (max-width: 767px) and (min-width: 320px){
   
   .navbar {
         padding: 5px;
@@ -1454,18 +1457,15 @@ background-color: #009688;
 }
 
 .pricing-card {
-  position: relative;
-  top: 10px;
+ position: relative;
+ top:12rem;
   border-radius: 12px;
   padding: 20px;
   width: 300px;
   height: 100vh;
   display: flex;
 }
-.price-intro {
-  position: relative;
-  top:-120px;
-}
+
 .pricing-header {
   display: flex;
   justify-content: space-between;
@@ -1504,12 +1504,12 @@ background-color: #009688;
 }
 .testimonials {
   position: relative;
-  top: 110px;
+  top: 30rem;
   left: 0px;
   background-color: #E0F2F1;
-  padding: 60px 20px;
+  padding: 20px 20px;
   text-align: center;
-  margin-top: -50px;
+
 }
 
 .testimonials-title {
@@ -1524,22 +1524,20 @@ background-color: #009688;
   justify-content: center;
   gap: 25px;
   flex-wrap: wrap;
-  ;
 }
-.testimonial-intro {
-  position: relative;
-  top: 150px;
-}
+
 .testimonial-card {
   background: #fff;
   border-radius: 15px;
   padding: 30px;
   width: 300px;
-  min-height: 220px;
+  height: 50vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  position: relative;
+  bottom: 5rem;
 }
 
 .testimonial-text {
@@ -1590,7 +1588,7 @@ background-color: #009688;
 }
 .cta-container {
   position: relative;
-  top: 70px;
+  top: 30rem;
   text-align: center;
   border-radius: 12px;
   max-width: 800px;
@@ -1606,6 +1604,8 @@ background-color: #009688;
   background-color: #009688;
   color: #ffffff;
   padding: 50px 20px;
+  position: relative;
+  top:30rem;
 }
 
 

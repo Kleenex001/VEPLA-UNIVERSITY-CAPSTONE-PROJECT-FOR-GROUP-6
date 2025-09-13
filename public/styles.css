@@ -2034,13 +2034,15 @@ background-color: none;
 }
 .pricing-section {
   display: flex;
+  flex-direction: column;
   transition: transform 0.5s ease-in-out;
   gap: 50px;
   width: 300px;
+  align-items: center;
 }
 
 .pricing-card {
- min-width: 100%; /* Show 1 card at a time */
+ width: 50%; /* Show 1 card at a time */
       background: white;
       border-radius: 10px;
       margin: 10px;
@@ -2122,15 +2124,12 @@ background-color: none;
 }
 
 .testimonial-text {
-  font-size: 16px;
+  font-size: 13px;
   color: #333;
   line-height: 1.6;
-  margin-bottom: 20px;
   flex-grow: 1;
 }
 #testimonials-text {
-  position: relative;
-  top:350px;
   padding: 30px;
 }
 #testimonials-text h4 {
