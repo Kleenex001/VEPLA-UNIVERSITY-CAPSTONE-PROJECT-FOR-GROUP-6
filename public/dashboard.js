@@ -3,7 +3,7 @@
 
 async function fetchDataFromAPI() {
   try {
-    const res = await fetch("/api/dashboard"); // 🔗 replace with your endpoint
+    const res = await fetch("/api/dashboard"); // replace with your endpoint
     if (!res.ok) throw new Error("Failed to fetch dashboard data");
     return await res.json();
   } catch (err) {
