@@ -1,5 +1,6 @@
 const form = document.getElementById('resetForm');
 const emailError = document.getElementById('emailError');
+ const otpError = document.getElementById('otpError');
 const newPasswordError = document.getElementById('newPasswordError');
 const confirmPasswordError = document.getElementById('confirmPasswordError');
 const message = document.getElementById('message');
@@ -9,6 +10,7 @@ form.addEventListener('submit', async function(event) {
 
   // Clear previous error messages
   emailError.textContent = '';
+   otpError.textContent = '';
   newPasswordError.textContent = '';
   confirmPasswordError.textContent = '';
   message.textContent = '';
@@ -19,6 +21,10 @@ form.addEventListener('submit', async function(event) {
     emailError.textContent = 'Enter a valid email address';
     return;
   }
+
+//validate Otp
+
+
 
   // Validate new password
   const newPassword = document.getElementById('newPassword').value;
@@ -43,17 +49,17 @@ form.addEventListener('submit', async function(event) {
 
     if (result.success) {
       message.style.color = 'green';
-      message.textContent = '✅ Password reset successful!';
+      message.textContent = ' Password reset successful!';
       setTimeout(() => {
         window.location.href = 'sign in.html';
       }, 2000);
     } else {
       message.style.color = 'red';
-      message.textContent = result.error || '❌ Failed to reset password. Try again.';
+      message.textContent = result.error || 'Failed to reset password. Try again.';
     }
   } catch (error) {
     console.error(error);
     message.style.color = 'red';
-    message.textContent = '⚠️ Server error. Please try again later.';
+    message.textContent = ' Server error. Please try again later.';
   }
 });
