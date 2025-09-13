@@ -2042,7 +2042,7 @@ background-color: none;
 }
 
 .pricing-card {
- width: 50%; /* Show 1 card at a time */
+ width: 80%; /* Show 1 card at a time */
       background: white;
       border-radius: 10px;
       margin: 10px;
