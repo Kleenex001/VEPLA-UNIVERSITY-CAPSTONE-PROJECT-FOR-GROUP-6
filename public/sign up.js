@@ -121,27 +121,32 @@ const termsError = document.getElementById("termsError");
     }
 
      if (valid) {
-    try {
-      const payload = {
-        firstName: firstName.value.trim(),
-        lastName: lastName.value.trim(),
-        businessName: bName.value.trim(),
-        email: email.value.trim(),
-        phoneNumber: phoneNumber.value.trim(),
-        password: password.value.trim(),
-      };
+  try {
+    const payload = {
+      firstName: firstName.value.trim(),
+      lastName: lastName.value.trim(),
+      businessName: bName.value.trim(),
+      email: email.value.trim(),
+      phoneNumber: phoneNumber.value.trim(),
+      password: password.value.trim(),
+    };
 
-      // Call API
-      await apiRequest(`${endpoints.auth}/signup`, "POST", payload);
+    // Call API
+    const response = await apiRequest(`${endpoints.auth}/signup`, "POST", payload);
 
-      alert("✅ Signup successful! Redirecting to login...");
-      signupForm.reset();
-      window.location.href = "sign in.html";
-    } catch (err) {
-      alert(`❌ Signup failed: ${err.message}`);
-    }
+    console.log("Signup response:", response);
+
+    alert("✅ Signup successful! Redirecting to login...");
+    signupForm.reset();
+
+    // Redirect - adjust path if needed
+    window.location.href = "./sign in.html";
+  } catch (err) {
+    console.error("Signup error:", err);
+    alert(`❌ Signup failed: ${err.message}`);
   }
-});
+}
+
 
 
 const hamburger = document.querySelector(".hamburger");
