@@ -2,8 +2,9 @@
 
 // ====== CONFIGURATION ======
 // Change this when moving between local dev and production
-const API_BASE_URL = "https://bizboost-backend.onrender.com/api";
-
+const BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:5000/api/auth"
 
 
 // ====== ENDPOINTS ======
