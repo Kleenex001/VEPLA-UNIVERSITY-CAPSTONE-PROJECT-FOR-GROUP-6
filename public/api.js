@@ -10,12 +10,12 @@ export const endpoints = {
   settings: '/api/settings',
 };
 
-export async function apiRequest(endpoint, method = 'GET', body = null) {
+export async function apiRequest(endpoints, method = 'GET', body = null) {
   const headers = { 'Content-Type': 'application/json' };
   const token = localStorage.getItem('authToken');
   if (token) headers['Authorization'] = `Bearer ${token}`;
 
-  const response = await fetch(`http://localhost:5000${endpoint}`, {
+  const response = await fetch(`http://localhost:5000${endpoints}`, {
     method,
     headers,
     body: body ? JSON.stringify(body) : null,

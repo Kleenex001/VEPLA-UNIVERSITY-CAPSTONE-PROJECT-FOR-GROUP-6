@@ -152,18 +152,3 @@ signupForm.addEventListener('submit', async function (e) {
     }
   }
 });
-
-// Hamburger menu
-const hamburger = document.querySelector('.hamburger');
-const sideBar = document.querySelector('.side-bar');
-hamburger.addEventListener('click', () => {
-  sideBar.style.display = sideBar.style.display === 'block' ? 'none' : 'block';
-});
-document.querySelector('.close-sidebar').addEventListener('click', () => {
-  sideBar.style.display = 'none';
-});
-document.querySelectorAll('.side-bar a:not(.close-sidebar)').forEach(link =>
-  link.addEventListener('click', () => {
-    sideBar.style.display = 'none';
-  })
-);
