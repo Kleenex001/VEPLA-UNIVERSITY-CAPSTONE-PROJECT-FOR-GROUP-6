@@ -905,16 +905,16 @@ body {
     position:relative;
     top: 10px;
     left:86px;
-    color: var(--button-hover-color);
-    background-color: var(--button-color);
-    padding: 5px 6px;
+   color: var(--button-color);
+    background-color: var(--button-hover-color);
+    padding: 6px 10px;
     border-radius: 5px;
     border: 1px solid var(--button-color);
     text-decoration: none;
 }
 #sign-up:hover {
     background-color: transparent;
-    color: var(--button-color);
+    color: var(--button-hover-color);
     border: 1px solid var(--button-color);
     cursor: pointer;
 }
@@ -972,16 +972,16 @@ body {
     position:relative;
     left: 95px;
     top:10px;
-    color: var(--button-color);
-    background-color: var(--button-hover-color);
-    padding: 5px 8px;
+    color: var(--button-hover-color);
+    background-color: transparent;
+    padding: 6px 10px;
     border-radius: 5px;
     border: 1px solid var(--button-color);
     text-decoration: none;
 }
 #sign-in:hover {
-    background-color: var(--button-color);
-    color: var(--button-hover-color);
+    background-color: var(--button-hover-color);
+    color: var(--button-color);
     cursor: pointer;
 }
 #sign-in:active {
@@ -1034,7 +1034,6 @@ body {
 #sign-in:visited:disabled:focus {
     box-shadow: none;
 }
-
 
 .user-stat {
   display: flex;
@@ -1360,7 +1359,7 @@ background-color: #009688;
 .social-icons a:hover {
   color: #004d40;
 }
-.footer-logo{margin-left: -25px;}
+
 
 /* Bottom section */
 .footer-bottom {

@@ -870,15 +870,15 @@ body {
     position:relative;
     top: 10px;
     left:86px;
-    color: var(--button-hover-color);
+    color: white;
     background-color: var(--button-color);
-    padding: 5px 6px;
+    padding: 6px 10px;
     border-radius: 5px;
     border: 1px solid var(--button-color);
     text-decoration: none;
 }
 #sign-up:hover {
-    background-color: transparent;
+    background-color: var(--button-hover-color);
     color: var(--button-color);
     border: 1px solid var(--button-color);
     cursor: pointer;
@@ -906,10 +906,10 @@ body {
     box-shadow: none;
 }
 #sign-up:visited {
-    color: var(--button-color);
+    color: white;
 }
 #sign-up:visited:hover {
-    color: var(--button-hover-color);
+    color: var(--button-color);
 }
 #sign-up:visited:active {
     transform: scale(0.98);
@@ -937,9 +937,9 @@ body {
     position:relative;
     left: 95px;
     top:10px;
-    color: var(--button-color);
+   color: var(--button-color);
     background-color: var(--button-hover-color);
-    padding: 5px 8px;
+    padding: 6px 10px;
     border-radius: 5px;
     border: 1px solid var(--button-color);
     text-decoration: none;
@@ -954,7 +954,7 @@ body {
 }
 #sign-in:focus {
     outline: none;
-    box-shadow: 0 0 5px var(--button-hover-color);
+    box-shadow: 0 0 5px var(--button-color);
 }
 #sign-in:disabled {
     background-color: #ccc;
@@ -972,10 +972,10 @@ body {
     box-shadow: none;
 }
 #sign-in:visited {
-    color: var(--button-hover-color);
+    color: var(--button-color);
 }
 #sign-in:visited:hover {
-    color: var(--button-color);
+    color: var(--button-hover-color);
 }
 #sign-in:visited:active {
     transform: scale(0.98);
@@ -999,7 +999,6 @@ body {
 #sign-in:visited:disabled:focus {
     box-shadow: none;
 }
-
 
 .user-stat {
   display: flex;
@@ -1253,7 +1252,7 @@ background-color: #009688;
 .social-icons a:hover {
   color: #004d40;
 }
-.footer-logo{margin-left: -25px;}
+
 
 /* Bottom section */
 .footer-bottom {
