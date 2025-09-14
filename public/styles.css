@@ -1798,7 +1798,7 @@ input[type="tel"] {
     top:0px;
     left: 250px;
     height: 100vh;
-    width: 250px;
+    width: 100vw;
     z-index: 1000;
     display: none;
     -webkit-backdrop-filter: blur(10px);
