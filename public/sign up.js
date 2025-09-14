@@ -119,8 +119,7 @@ const termsError = document.getElementById("termsError");
         termsError.style.display = "none";
         terms.classList.remove("input-error");
     }
-
-     if (valid) {
+ if (valid) {
   try {
     const payload = {
       firstName: firstName.value.trim(),
@@ -146,7 +145,7 @@ const termsError = document.getElementById("termsError");
     alert(`❌ Signup failed: ${err.message}`);
   }
 }
-
+});
 
 
 const hamburger = document.querySelector(".hamburger");
