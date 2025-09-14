@@ -1,38 +1,27 @@
 // api.js
-
-// ====== CONFIGURATION ======
-// Change this when moving between local dev and production
-const BASE_URL ="http://localhost:5000/api"
-
-
-// ====== ENDPOINTS ======
 export const endpoints = {
-  auth: `${BASE_URL}/auth`,
-  dashboard: `${BASE_URL}/dashboard`,
-  sales: `${BASE_URL}/sales`,
-  inventory: `${BASE_URL}/inventory`,
-  customers: `${BASE_URL}/customers`,
-  deliveries: `${BASE_URL}/deliveries`,
-  suppliers: `${BASE_URL}/suppliers`,
-  settings: `${BASE_URL}/settings`,
+  auth: '/api/auth',
+  dashboard: '/api/dashboard',
+  sales: '/api/sales',
+  inventory: '/api/inventory',
+  customers: '/api/customers',
+  deliveries: '/api/deliveries',
+  suppliers: '/api/suppliers',
+  settings: '/api/settings',
 };
 
-// ====== HELPER: GENERIC API CALL ======
-export async function apiRequest(url, method = "GET", body = null) {
-  const options = {
+export async function apiRequest(endpoint, method = 'GET', body = null) {
+  const headers = { 'Content-Type': 'application/json' };
+  const token = localStorage.getItem('authToken');
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+
+  const response = await fetch(`http://localhost:5000${endpoint}`, {
     method,
-    headers: { "Content-Type": "application/json" },
-    credentials: "include", // important if you’re handling cookies/auth
-  };
+    headers,
+    body: body ? JSON.stringify(body) : null,
+  });
 
-  if (body) options.body = JSON.stringify(body);
-
-  const res = await fetch(url, options);
-
-  if (!res.ok) {
-    const errorText = await res.text();
-    throw new Error(errorText || "API request failed");
-  }
-
-  return res.json();
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message || 'Request failed');
+  return data;
 }
