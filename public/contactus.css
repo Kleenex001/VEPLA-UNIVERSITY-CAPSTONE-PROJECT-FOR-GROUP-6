@@ -1207,7 +1207,7 @@ background-color: #009688;
    .side-bar {
     position: fixed;
     top:0%;
-    left: 30%;
+    left: 190px;
     height: 100vh;
     width: 200px;
     z-index: 1000;
