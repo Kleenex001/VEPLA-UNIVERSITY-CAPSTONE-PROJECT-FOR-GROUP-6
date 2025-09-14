@@ -140,7 +140,7 @@ const termsError = document.getElementById("termsError");
     signupForm.reset();
 
     // Redirect - adjust path if needed
-    window.location.href = "./sign in.html";
+    window.location.href = "sign in.html";
   } catch (err) {
     console.error("Signup error:", err);
     alert(`❌ Signup failed: ${err.message}`);
