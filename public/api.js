@@ -5,7 +5,8 @@
 const BASE_URL =
   window.location.hostname === "localhost"
     ? "http://localhost:5000/api"
-    : "https://your-backend.onrender.com/api";
+    : "https://bizboost-backend.onrender.com/api";
+
 
 // ====== ENDPOINTS ======
 export const endpoints = {

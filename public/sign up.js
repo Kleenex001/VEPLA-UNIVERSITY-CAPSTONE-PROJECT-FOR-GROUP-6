@@ -2,6 +2,7 @@ import { endpoints, apiRequest } from "./api.js"; // import central API
 
 
 
+
 const signupForm = document.getElementById("signupForm");
             signupForm.addEventListener("submit", async function (e) {
                 e.preventDefault(); // stop default submit
