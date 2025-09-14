@@ -1,5 +1,9 @@
+import { endpoints, apiRequest } from "./api.js"; // import central API
+
+
+
 const signupForm = document.getElementById("signupForm");
-            signupForm.addEventListener("submit", function (e) {
+            signupForm.addEventListener("submit", async function (e) {
                 e.preventDefault(); // stop default submit
 
 
@@ -116,22 +120,29 @@ const termsError = document.getElementById("termsError");
         terms.classList.remove("input-error");
     }
 
-    if (valid) {
-        // submit the form
-        signupForm.submit();
-        signupForm.reset();
-        fetch('sign in.html').then(response => {
-            if (response.ok) {
-                window.location.href = 'sign in.html'; // redirect to success page
-            } else {
-                alert('Error submitting form. Please try again.');
-            }
-        }).catch(error => {
-            console.error('Error:', error);
-            alert('Error submitting form. Please try again.');
-        });
+     if (valid) {
+    try {
+      const payload = {
+        firstName: firstName.value.trim(),
+        lastName: lastName.value.trim(),
+        businessName: bName.value.trim(),
+        email: email.value.trim(),
+        phoneNumber: phoneNumber.value.trim(),
+        password: password.value.trim(),
+      };
+
+      // Call API
+      await apiRequest(`${endpoints.auth}/signup`, "POST", payload);
+
+      alert("✅ Signup successful! Redirecting to login...");
+      signupForm.reset();
+      window.location.href = "sign in.html";
+    } catch (err) {
+      alert(`❌ Signup failed: ${err.message}`);
     }
+  }
 });
+
 
 const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".nav-menu");
