@@ -266,7 +266,7 @@ body {
 .form-image-container {
     position: relative;
     top:10rem;
-    left: 8rem;
+    left: 12rem;
     display: flex;
     list-style: none;
     gap: 5rem;
