@@ -1837,6 +1837,7 @@ input[type="tel"] {
    }
      body {
             flex-direction: column;
+            overflow-x: hidden;
         }
    .nav-item a {
     display: none;
