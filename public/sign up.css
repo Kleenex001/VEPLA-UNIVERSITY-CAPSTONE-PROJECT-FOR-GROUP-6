@@ -462,7 +462,7 @@ footer {
     top:10px;
     height: 40px;
     width: 50px;
-}
+
 }
 #sign-up {
     position:inherit;
@@ -634,6 +634,7 @@ footer {
 }
 #image img {
     width: 400px;
+}
 }
 /* Mobile portrait */
 @media  (max-width: 767px) and (min-width:320px) {

@@ -470,7 +470,7 @@ footer {
     height: 40px;
     width: 50px;
 }
-}
+
 #sign-up {
     position:inherit;
     top:inherit;
@@ -647,7 +647,7 @@ footer {
     height: 30vh;
 }
 
-
+}
 /* Mobile portrait */
 @media  (max-width: 767px) {
     .navbar {
