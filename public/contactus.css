@@ -1220,6 +1220,7 @@ background-color: #009688;
     cursor: pointer;
     align-items: center;
     justify-content: center;
+    overflow-x: hidden;
 }
 
    .hamburger {
