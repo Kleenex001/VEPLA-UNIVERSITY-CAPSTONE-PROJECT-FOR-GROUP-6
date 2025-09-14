@@ -2,7 +2,7 @@
 
 // ====== CONFIGURATION ======
 // Change this when moving between local dev and production
-const BASE_URL ="http://localhost:5000/api/auth"
+const BASE_URL ="http://localhost:5000/api"
 
 
 // ====== ENDPOINTS ======
