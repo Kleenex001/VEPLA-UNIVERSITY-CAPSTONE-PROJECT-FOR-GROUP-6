@@ -78,7 +78,7 @@
     <h2>We Would Love to Hear From You</h2>
     <p>
       Questions, support, or a friendly hello — we’re here for you. <br>
-      Whether you’re exploring Nexora or already using it, our team is always ready to help.
+      Whether you’re exploring Bizboost or already using it, our team is always ready to help.
     </p>
   </div>
 
@@ -126,8 +126,6 @@
     //get form values
     const name=document.getElementById("name");
     const email=document.getElementById("email");
-    const phone=document.getElementById("phone");
-    const business=document.getElementById("business");
     const comments=document.getElementById("comments");
 
     //error handling
@@ -136,8 +134,6 @@
     const errors = {
       name: document.getElementById("nameError"),
       email: document.getElementById("emailError"),
-      phone: document.getElementById("phoneError"),
-      business: document.getElementById("businessError"),
       comments: document.getElementById("commentsError"),
     };
 
@@ -165,26 +161,6 @@
       email.classList.add("input-error");
       isValid = false;
     }
-    //phone validation
-    if (phone.value.trim() === "" || phone.value.length < 11) {
-      phoneError.textContent = "Enter a valid phone number";
-      phoneError.style.display = "block";
-      phone.classList.add("input-error");
-      isValid = false;
-    } else {
-      phoneError.style.display = "none";
-      phone.classList.remove("input-error");
-    }
-    //business validation
-    if (business.value.trim() === "" || business.value.length < 2) {
-      businessError.textContent = "Enter a valid business name";
-      businessError.style.display = "block";
-      business.classList.add("input-error");
-      isValid = false;
-    } else {
-      businessError.style.display = "none";
-      business.classList.remove("input-error");
-    }
     //comments validation
     if (comments.value.trim() === "") {
       commentsError.textContent = "Enter your comments";
@@ -201,8 +177,6 @@
       // Clear form fields
       name.value = "";
       email.value = "";
-      phone.value = "";
-      business.value = "";
       comments.value = "";
       newsLetterForm.reset();
     } else {

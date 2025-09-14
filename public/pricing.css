@@ -697,7 +697,7 @@ details[open] summary::after {
 .footer-logo {
   position: relative;
   top: 0%;
-  left: 0.5rem;
+  right: 7.5rem;
   width:7.5rem;
 }
 
@@ -1587,7 +1587,6 @@ background-color: #009688;
   font-size: 13px;
   padding: 5px;
 }
-}
 .cta-container {
   position: relative;
   top: 12rem;
@@ -1676,9 +1675,6 @@ background-color: #009688;
 .social-icons a:hover {
   color: #004d40;
 }
-.footer-logo {
-  margin-left: -25px;
-}
 
 /* Bottom section */
 .footer-bottom {
@@ -1695,4 +1691,5 @@ background-color: #009688;
 .footer-bottom p {
   font-size: 14px;
   margin: 0;
+}
 }
