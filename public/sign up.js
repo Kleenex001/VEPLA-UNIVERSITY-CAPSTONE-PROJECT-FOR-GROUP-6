@@ -42,6 +42,7 @@ signupForm.addEventListener('submit', async (e) => {
     password: document.getElementById('pwordError'),
     confirmPassword: document.getElementById('cPasswordError'),
     terms: document.getElementById('termsError'),
+    success:document.getElementById('successMsg')
   };
 
   let valid = true;
@@ -107,9 +108,9 @@ signupForm.addEventListener('submit', async (e) => {
     console.log('Signup response:', response);
 
     // Success message (reuse firstNameError area for global feedback)
-    errors.firstName.textContent = '✅ Signup successful! Redirecting to login...';
-    errors.firstName.style.display = 'block';
-    errors.firstName.classList.remove('input-error');
+    errors.successMsg.textContent = '✅ Signup successful! Redirecting to login...';
+    errors.successMsg.style.display = 'block';
+    errors.successMsg.classList.remove('input-error');
 
     signupForm.reset();
 
