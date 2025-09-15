@@ -2,19 +2,6 @@
 import { endpoints, apiRequest } from './api.js';
 
 const signupForm = document.getElementById('signupForm');
-const emailInput = document.getElementById('email');
-const usernameInput = document.getElementById('username');
-
-// === Auto-suggest username from email ===
-emailInput.addEventListener('input', () => {
-  const emailValue = emailInput.value.trim();
-  if (emailValue.includes('@')) {
-    const suggested = emailValue.split('@')[0].replace(/[^a-zA-Z0-9._-]/g, ''); 
-    if (suggested.length >= 3 && usernameInput.value.trim() === '') {
-      usernameInput.value = suggested; // only suggest if user hasn’t typed
-    }
-  }
-});
 
 // === Validation Helpers ===
 const showError = (input, errorElement, message) => {
@@ -38,7 +25,7 @@ signupForm.addEventListener('submit', async (e) => {
     firstName: document.getElementById('firstName'),
     lastName: document.getElementById('lastName'),
     businessName: document.getElementById('bName'),
-    username: usernameInput, // ✅ new
+    username: username,
     email: emailInput,
     phoneNumber: document.getElementById('phoneNumber'),
     password: document.getElementById('pWord'),
