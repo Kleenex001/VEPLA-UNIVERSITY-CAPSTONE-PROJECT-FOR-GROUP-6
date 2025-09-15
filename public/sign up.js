@@ -30,6 +30,7 @@ signupForm.addEventListener('submit', async (e) => {
     password: document.getElementById('pWord'),
     confirmPassword: document.getElementById('cPassword'),
     terms: document.getElementById('terms'),
+    successMsg:document.getElementById('successMsg'),
   };
 
   // Collect error fields
@@ -42,7 +43,7 @@ signupForm.addEventListener('submit', async (e) => {
     password: document.getElementById('pwordError'),
     confirmPassword: document.getElementById('cPasswordError'),
     terms: document.getElementById('termsError'),
-    success:document.getElementById('successMsg')
+    successMsg:document.getElementById('successMsg'),
   };
 
   let valid = true;
