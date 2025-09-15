@@ -2,6 +2,19 @@
 import { endpoints, apiRequest } from './api.js';
 
 const signupForm = document.getElementById('signupForm');
+const emailInput = document.getElementById('email');
+const usernameInput = document.getElementById('username');
+
+// === Auto-suggest username from email ===
+emailInput.addEventListener('input', () => {
+  const emailValue = emailInput.value.trim();
+  if (emailValue.includes('@')) {
+    const suggested = emailValue.split('@')[0].replace(/[^a-zA-Z0-9._-]/g, ''); 
+    if (suggested.length >= 3 && usernameInput.value.trim() === '') {
+      usernameInput.value = suggested; // only suggest if user hasn’t typed
+    }
+  }
+});
 
 // === Validation Helpers ===
 const showError = (input, errorElement, message) => {
@@ -25,8 +38,8 @@ signupForm.addEventListener('submit', async (e) => {
     firstName: document.getElementById('firstName'),
     lastName: document.getElementById('lastName'),
     businessName: document.getElementById('bName'),
-    username: document.getElementById('username'), // ✅ new
-    email: document.getElementById('email'),
+    username: usernameInput, // ✅ new
+    email: emailInput,
     phoneNumber: document.getElementById('phoneNumber'),
     password: document.getElementById('pWord'),
     confirmPassword: document.getElementById('cPassword'),
@@ -39,7 +52,7 @@ signupForm.addEventListener('submit', async (e) => {
     firstName: document.getElementById('firstNameError'),
     lastName: document.getElementById('lastNameError'),
     businessName: document.getElementById('BnameError'),
-    username: document.getElementById('usernameError'), // ✅ new
+    username: document.getElementById('usernameError'),
     email: document.getElementById('emailError'),
     phoneNumber: document.getElementById('phoneError'),
     password: document.getElementById('pwordError'),
@@ -129,7 +142,13 @@ signupForm.addEventListener('submit', async (e) => {
 
   } catch (error) {
     console.error('Signup error:', error);
-    errors.successMsg.textContent = `❌ Signup failed: ${error.message}`;
+
+    if (error.message.includes('duplicate key')) {
+      errors.successMsg.textContent = '❌ Username already taken. Please try another.';
+    } else {
+      errors.successMsg.textContent = `❌ Signup failed: ${error.message}`;
+    }
+
     errors.successMsg.style.display = 'block';
     errors.successMsg.classList.add('input-error');
   }
