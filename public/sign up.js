@@ -39,7 +39,7 @@ signupForm.addEventListener('submit', async (e) => {
     firstName: document.getElementById('firstNameError'),
     lastName: document.getElementById('lastNameError'),
     businessName: document.getElementById('BnameError'),
-    username: document.getElementById('usernameError'), // ✅ new
+    username: document.getElementById('usernameError'),
     email: document.getElementById('emailError'),
     phoneNumber: document.getElementById('phoneError'),
     password: document.getElementById('pwordError'),
@@ -106,11 +106,15 @@ signupForm.addEventListener('submit', async (e) => {
       firstName: fields.firstName.value.trim(),
       lastName: fields.lastName.value.trim(),
       businessName: fields.businessName.value.trim(),
-      username: fields.username.value.trim(), // ✅ send username
+      username: fields.username.value.trim(),   // ✅
+      userName: fields.username.value.trim(),  // ✅ backend-safe (camelCase)
       email: fields.email.value.trim(),
       phoneNumber: fields.phoneNumber.value.trim(),
       password: fields.password.value.trim(),
     };
+
+    // Debug: log payload
+    console.log("Payload being sent:", payload);
 
     const response = await apiRequest(`${endpoints.auth}/signup`, 'POST', payload);
 
