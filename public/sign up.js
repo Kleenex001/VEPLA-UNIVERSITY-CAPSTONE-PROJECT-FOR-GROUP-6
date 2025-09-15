@@ -25,8 +25,8 @@ signupForm.addEventListener('submit', async (e) => {
     firstName: document.getElementById('firstName'),
     lastName: document.getElementById('lastName'),
     businessName: document.getElementById('bName'),
-    username: username,
-    email: emailInput,
+    username: document.getElementById('username'), // ✅ new
+    email: document.getElementById('email'),
     phoneNumber: document.getElementById('phoneNumber'),
     password: document.getElementById('pWord'),
     confirmPassword: document.getElementById('cPassword'),
@@ -39,7 +39,7 @@ signupForm.addEventListener('submit', async (e) => {
     firstName: document.getElementById('firstNameError'),
     lastName: document.getElementById('lastNameError'),
     businessName: document.getElementById('BnameError'),
-    username: document.getElementById('usernameError'),
+    username: document.getElementById('usernameError'), // ✅ new
     email: document.getElementById('emailError'),
     phoneNumber: document.getElementById('phoneError'),
     password: document.getElementById('pwordError'),
@@ -129,13 +129,7 @@ signupForm.addEventListener('submit', async (e) => {
 
   } catch (error) {
     console.error('Signup error:', error);
-
-    if (error.message.includes('duplicate key')) {
-      errors.successMsg.textContent = '❌ Username already taken. Please try another.';
-    } else {
-      errors.successMsg.textContent = `❌ Signup failed: ${error.message}`;
-    }
-
+    errors.successMsg.textContent = `❌ Signup failed: ${error.message}`;
     errors.successMsg.style.display = 'block';
     errors.successMsg.classList.add('input-error');
   }
