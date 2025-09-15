@@ -1,54 +1,80 @@
-const signinForm = document.getElementById("signinForm");
-signinForm.addEventListener("submit", function (e) {
-    e.preventDefault(); // stop default submit
+// signin.js
+import { endpoints, apiRequest } from './api.js';
 
-    // get form values
-    const email = document.getElementById("email");
-    const password = document.getElementById("password");
+const signinForm = document.getElementById('signinForm');
 
-    // errors
-    const emailError = document.getElementById("emailError");
-    const passwordError = document.getElementById("passwordError");
+// === Validation Helpers ===
+const showError = (input, errorElement, message) => {
+  errorElement.textContent = message;
+  errorElement.style.display = 'block';
+  input.classList.add('input-error');
+};
 
-    let valid = true;
+const clearError = (input, errorElement) => {
+  errorElement.textContent = '';
+  errorElement.style.display = 'none';
+  input.classList.remove('input-error');
+};
 
-    // email validation
-    if (email.value.includes("@") && email.value.includes(".com")) {
-        emailError.textContent = "";
-        emailError.style.display = "none";
-        email.classList.remove("input-error");
-    } else {
-        emailError.textContent = "Valid email is required.";
-        emailError.style.display = "block";
-        email.classList.add("input-error");
-        valid = false;
-    } 
+// === Submit Handler ===
+signinForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-    // password validation
-    if (password.value.trim() === "" || password.value.length < 6) {
-        passwordError.textContent = "Password is required and must be at least 6 characters.";
-        passwordError.style.display = "block";
-        password.classList.add("input-error");
-        valid = false;
-    } else {
-        passwordError.textContent = "";
-        passwordError.style.display = "none";
-        password.classList.remove("input-error");
+  // Fields
+  const email = document.getElementById('email');
+  const password = document.getElementById('password');
+
+  // Errors
+  const emailError = document.getElementById('emailError');
+  const passwordError = document.getElementById('passwordError');
+
+  let valid = true;
+
+  // Email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email.value.trim())) {
+    showError(email, emailError, 'Enter a valid email (e.g., user@example.com).');
+    valid = false;
+  } else clearError(email, emailError);
+
+  // Password validation
+  if (password.value.trim().length < 6) {
+    showError(password, passwordError, 'Password must be at least 6 characters.');
+    valid = false;
+  } else clearError(password, passwordError);
+
+  if (!valid) return;
+
+  try {
+    const payload = {
+      email: email.value.trim(),
+      password: password.value.trim(),
+    };
+
+    const response = await apiRequest(`${endpoints.auth}/signin`, 'POST', payload);
+
+    console.log('Signin response:', response);
+
+    // Store token in localStorage
+    if (response.token) {
+      localStorage.setItem('token', response.token);
     }
 
-    if (valid) {
-        // submit the form
-        signinForm.submit();
-        signinForm.reset();
-        fetch('dashboard.html').then(response => {
-            if (response.ok) {
-                window.location.href = 'dashboard.html'; // redirect to dashboard
-            } else {
-                alert('invalid email or password. Please try again.');
-            }
-        }).catch(error => {
-            console.error('Error:', error);
-            alert('invalid email or password. Please try again.');
-        });
-    }
+    // Success message in emailError block (can be moved to a global message div)
+    emailError.textContent = '✅ Login successful! Redirecting to dashboard...';
+    emailError.style.display = 'block';
+    emailError.classList.remove('input-error');
+
+    signinForm.reset();
+
+    setTimeout(() => {
+      window.location.href = 'dashboard.html';
+    }, 1500);
+
+  } catch (error) {
+    console.error('Signin error:', error);
+    emailError.textContent = `❌ Login failed: ${error.message}`;
+    emailError.style.display = 'block';
+    emailError.classList.add('input-error');
+  }
 });
