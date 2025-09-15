@@ -1,11 +1,11 @@
 // signup.js
 import { endpoints, apiRequest } from './api.js';
 
-// === Generate unique username (based on email + random string) ===
+// === Username generator ===
 function generateUsername(email) {
-  const base = email.split('@')[0].replace(/[^a-z0-9]/gi, '').toLowerCase();
-  const rand = Math.random().toString(36).substring(2, 6);
-  return `${base}_${rand}`;
+  const base = email.split('@')[0];
+  const rand = Math.floor(Math.random() * 10000);
+  return `${base}${rand}`;
 }
 
 const signupForm = document.getElementById('signupForm');
@@ -98,11 +98,10 @@ signupForm.addEventListener('submit', async (e) => {
     valid = false;
   } else clearError(fields.terms, errors.terms);
 
-  // === Stop if invalid ===
+  // === Submit if valid ===
   if (!valid) return;
 
   try {
-    // Build base payload
     const payload = {
       firstName: fields.firstName.value.trim(),
       lastName: fields.lastName.value.trim(),
@@ -110,26 +109,10 @@ signupForm.addEventListener('submit', async (e) => {
       email: fields.email.value.trim(),
       phoneNumber: fields.phoneNumber.value.trim(),
       password: fields.password.value.trim(),
-      username: generateUsername(fields.email.value.trim()), // initial username
+      username: generateUsername(fields.email.value.trim()), // ✅ ensure unique username
     };
 
-    let response;
-    let retries = 3; // try up to 3 times in case of duplicate username
-
-    while (retries > 0) {
-      try {
-        response = await apiRequest(`${endpoints.auth}/signup`, 'POST', payload);
-        break; // success, exit loop
-      } catch (err) {
-        if (err.message.includes('duplicate key error') && retries > 1) {
-          console.warn('Duplicate username detected, retrying...');
-          payload.username = generateUsername(fields.email.value.trim()); // regenerate username
-          retries--;
-        } else {
-          throw err; // rethrow other errors
-        }
-      }
-    }
+    const response = await apiRequest(`${endpoints.auth}/signup`, 'POST', payload);
 
     console.log('Signup response:', response);
 
