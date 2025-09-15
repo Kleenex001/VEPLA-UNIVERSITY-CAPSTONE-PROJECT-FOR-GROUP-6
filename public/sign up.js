@@ -1,128 +1,158 @@
 // signup.js
-import { endpoints, apiRequest } from './api.js';
+import { endpoints, apiRequest } from "./api.js";
 
-const signupForm = document.getElementById('signupForm');
+/* ---------------- Username Workaround Helpers ---------------- */
+function sanitizeForUsername(str) {
+  return String(str || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "") // only letters and numbers
+    .slice(0, 20);
+}
 
-// === Validation Helpers ===
-const showError = (input, errorElement, message) => {
-  errorElement.textContent = message;
-  errorElement.style.display = 'block';
-  input.classList.add('input-error');
-};
+function makeUsername(base, suffix) {
+  return suffix ? `${base}-${suffix}` : base;
+}
 
-const clearError = (input, errorElement) => {
-  errorElement.textContent = '';
-  errorElement.style.display = 'none';
-  input.classList.remove('input-error');
-};
+function randomSuffix() {
+  return (
+    Math.random().toString(16).slice(2, 6) +
+    String(Date.now()).slice(-4)
+  );
+}
 
-// === Main Submit Handler ===
-signupForm.addEventListener('submit', async (e) => {
+async function trySignupWithUniqueUsername(payload, maxRetries = 5) {
+  const baseCandidate =
+    sanitizeForUsername(payload.businessName) ||
+    sanitizeForUsername(payload.firstName + payload.lastName) ||
+    "user";
+
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    const suffix = attempt === 0 ? "" : randomSuffix();
+    const username = makeUsername(baseCandidate, suffix);
+
+    const tryPayload = { ...payload, username };
+
+    try {
+      const res = await apiRequest(`${endpoints.auth}/signup`, "POST", tryPayload);
+      return res; // success
+    } catch (err) {
+      const msg = (err && err.message) ? err.message.toLowerCase() : "";
+      if (msg.includes("duplicate") && msg.includes("username")) {
+        console.warn(`Duplicate username '${username}', retrying...`);
+        continue; // try again with new suffix
+      }
+      throw err; // other error (e.g. email exists)
+    }
+  }
+
+  throw new Error("Unable to generate a unique username. Please try again later.");
+}
+
+/* ---------------- Form Handling ---------------- */
+const signupForm = document.getElementById("signupForm");
+
+signupForm.addEventListener("submit", async function (e) {
   e.preventDefault();
 
-  // Collect input fields
-  const fields = {
-    firstName: document.getElementById('firstName'),
-    lastName: document.getElementById('lastName'),
-    businessName: document.getElementById('bName'),
-    email: document.getElementById('email'),
-    phoneNumber: document.getElementById('phoneNumber'),
-    password: document.getElementById('pWord'),
-    confirmPassword: document.getElementById('cPassword'),
-    terms: document.getElementById('terms'),
-    successMsg:document.getElementById('successMsg'),
-  };
+  // Inputs
+  const firstName = document.getElementById("firstName");
+  const lastName = document.getElementById("lastName");
+  const bName = document.getElementById("bName");
+  const email = document.getElementById("email");
+  const phoneNumber = document.getElementById("phoneNumber");
+  const password = document.getElementById("pWord");
+  const cPassword = document.getElementById("cPassword");
+  const terms = document.getElementById("terms");
 
-  // Collect error fields
-  const errors = {
-    firstName: document.getElementById('firstNameError'),
-    lastName: document.getElementById('lastNameError'),
-    businessName: document.getElementById('BnameError'),
-    email: document.getElementById('emailError'),
-    phoneNumber: document.getElementById('phoneError'),
-    password: document.getElementById('pwordError'),
-    confirmPassword: document.getElementById('cPasswordError'),
-    terms: document.getElementById('termsError'),
-    successMsg:document.getElementById('successMsg'),
-  };
+  // Error elements
+  const firstNameError = document.getElementById("firstNameError");
+  const lastNameError = document.getElementById("lastNameError");
+  const bNameError = document.getElementById("BnameError");
+  const emailError = document.getElementById("emailError");
+  const phoneError = document.getElementById("phoneError");
+  const pwordError = document.getElementById("pwordError");
+  const cPasswordError = document.getElementById("cPasswordError");
+  const termsError = document.getElementById("termsError");
 
   let valid = true;
 
-  // === Field Validations ===
-  if (fields.firstName.value.trim().length < 2) {
-    showError(fields.firstName, errors.firstName, 'First name must be at least 2 characters.');
+  /* ---------------- Validations ---------------- */
+  if (firstName.value.trim() === "" || firstName.value.length < 2) {
+    firstNameError.textContent = "First name must be at least 2 characters.";
+    firstNameError.style.display = "block";
     valid = false;
-  } else clearError(fields.firstName, errors.firstName);
+  } else firstNameError.style.display = "none";
 
-  if (fields.lastName.value.trim().length < 2) {
-    showError(fields.lastName, errors.lastName, 'Last name must be at least 2 characters.');
+  if (lastName.value.trim() === "" || lastName.value.length < 2) {
+    lastNameError.textContent = "Last name must be at least 2 characters.";
+    lastNameError.style.display = "block";
     valid = false;
-  } else clearError(fields.lastName, errors.lastName);
+  } else lastNameError.style.display = "none";
 
-  if (fields.businessName.value.trim().length < 2) {
-    showError(fields.businessName, errors.businessName, 'Business name must be at least 2 characters.');
+  if (bName.value.trim() === "" || bName.value.length < 2) {
+    bNameError.textContent = "Business name must be at least 2 characters.";
+    bNameError.style.display = "block";
     valid = false;
-  } else clearError(fields.businessName, errors.businessName);
+  } else bNameError.style.display = "none";
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(fields.email.value.trim())) {
-    showError(fields.email, errors.email, 'Enter a valid email (e.g., user@example.com).');
+  if (!emailRegex.test(email.value.trim())) {
+    emailError.textContent = "Enter a valid email (e.g. user@example.com).";
+    emailError.style.display = "block";
     valid = false;
-  } else clearError(fields.email, errors.email);
+  } else emailError.style.display = "none";
 
   const phoneRegex = /^\+?\d{10,14}$/;
-  if (!phoneRegex.test(fields.phoneNumber.value.trim())) {
-    showError(fields.phoneNumber, errors.phoneNumber, 'Phone must be 10–14 digits (e.g., +2341234567890).');
+  if (!phoneRegex.test(phoneNumber.value.trim())) {
+    phoneError.textContent =
+      "Phone must be 10-14 digits (e.g. +2348012345678 or 08123456789).";
+    phoneError.style.display = "block";
     valid = false;
-  } else clearError(fields.phoneNumber, errors.phoneNumber);
+  } else phoneError.style.display = "none";
 
-  if (fields.password.value.length < 6) {
-    showError(fields.password, errors.password, 'Password must be at least 6 characters.');
+  if (password.value.trim() === "" || password.value.length < 6) {
+    pwordError.textContent = "Password must be at least 6 characters.";
+    pwordError.style.display = "block";
     valid = false;
-  } else clearError(fields.password, errors.password);
+  } else pwordError.style.display = "none";
 
-  if (fields.password.value !== fields.confirmPassword.value) {
-    showError(fields.confirmPassword, errors.confirmPassword, 'Passwords do not match.');
+  if (password.value !== cPassword.value) {
+    cPasswordError.textContent = "Passwords do not match.";
+    cPasswordError.style.display = "block";
     valid = false;
-  } else clearError(fields.confirmPassword, errors.confirmPassword);
+  } else cPasswordError.style.display = "none";
 
-  if (!fields.terms.checked) {
-    showError(fields.terms, errors.terms, 'You must accept the terms and conditions.');
+  if (!terms.checked) {
+    termsError.textContent = "You must accept the terms.";
+    termsError.style.display = "block";
     valid = false;
-  } else clearError(fields.terms, errors.terms);
+  } else termsError.style.display = "none";
 
-  // === Submit if valid ===
   if (!valid) return;
 
+  /* ---------------- API Request ---------------- */
+  const payload = {
+    firstName: firstName.value.trim(),
+    lastName: lastName.value.trim(),
+    businessName: bName.value.trim(),
+    email: email.value.trim(),
+    phoneNumber: phoneNumber.value.trim(),
+    password: password.value.trim(),
+  };
+
   try {
-    const payload = {
-      firstName: fields.firstName.value.trim(),
-      lastName: fields.lastName.value.trim(),
-      businessName: fields.businessName.value.trim(),
-      email: fields.email.value.trim(),
-      phoneNumber: fields.phoneNumber.value.trim(),
-      password: fields.password.value.trim(),
-    };
+    const response = await trySignupWithUniqueUsername(payload, 6);
+    console.log("Signup success:", response);
 
-    const response = await apiRequest(`${endpoints.auth}/signup`, 'POST', payload);
-
-    console.log('Signup response:', response);
-
-    // Success message (reuse firstNameError area for global feedback)
-    errors.successMsg.textContent = '✅ Signup successful! Redirecting to login...';
-    errors.successMsg.style.display = 'block';
-    errors.successMsg.classList.remove('input-error');
-
+    alert("✅ Signup successful! Redirecting to login...");
     signupForm.reset();
 
     setTimeout(() => {
-      window.location.href = 'sign in.html';
-    }, 2000);
-
-  } catch (error) {
-    console.error('Signup error:', error);
-    errors.successMsg.textContent = `❌ Signup failed: ${error.message}`;
-    errors.successMsg.style.display = 'block';
-    errors.successMsg.classList.add('input-error');
+      window.location.href = "sign in.html";
+    }, 1500);
+  } catch (err) {
+    console.error("Signup error:", err);
+    alert(`❌ Signup failed: ${err.message}`);
   }
 });
+
