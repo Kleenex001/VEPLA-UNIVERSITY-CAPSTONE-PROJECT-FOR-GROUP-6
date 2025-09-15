@@ -120,8 +120,8 @@ signupForm.addEventListener('submit', async (e) => {
 
   } catch (error) {
     console.error('Signup error:', error);
-    errors.firstName.textContent = `❌ Signup failed: ${error.message}`;
-    errors.firstName.style.display = 'block';
-    errors.firstName.classList.add('input-error');
+    errors.successMsg.textContent = `❌ Signup failed: ${error.message}`;
+    errors.successMsg.style.display = 'block';
+    errors.successMsg.classList.add('input-error');
   }
 });
