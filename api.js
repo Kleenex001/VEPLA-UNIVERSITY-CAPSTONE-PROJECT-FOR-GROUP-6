@@ -3,13 +3,27 @@
 const BASE_URL = "https://vephla-capstone-project-backend-and.onrender.com/api";
 
 // -------------------- HELPERS --------------------
+// -------------------- HELPERS --------------------
 async function handleFetch(res) {
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(text || `HTTP error! status: ${res.status}`);
+  // Read response text
+  const text = await res.text();
+
+  // Try to parse JSON, fallback to raw text if not JSON
+  let data;
+  try {
+    data = text ? JSON.parse(text) : {};
+  } catch {
+    data = { message: text || "Invalid JSON response" };
   }
-  return res.json();
+
+  // If response not OK, throw the parsed object
+  if (!res.ok) {
+    throw data;
+  }
+
+  return data;
 }
+
 
 function getAuthToken() {
   const token = localStorage.getItem("token");
@@ -200,6 +214,17 @@ export async function addSupplier(supplier) {
 
 // -------------------- SALES --------------------
 
+// Helper to normalize enum values
+function normalizeEnum(value, type) {
+  if (!value) return value;
+  const enums = {
+    paymentType: ["Cash", "Mobile"],
+    status: ["Pending", "Completed"],
+  };
+  const valid = enums[type].find(e => e.toLowerCase() === value.toLowerCase());
+  return valid || value;
+}
+
 // Get all sales
 export async function getSales() {
   const token = getAuthToken();
@@ -212,6 +237,11 @@ export async function getSales() {
 // Add a new sale
 export async function addSale(sale) {
   const token = getAuthToken();
+
+  // Normalize enums
+  sale.paymentType = normalizeEnum(sale.paymentType, "paymentType");
+  sale.status = normalizeEnum(sale.status, "status");
+
   const res = await fetch(`${BASE_URL}/sales`, {
     method: "POST",
     headers: {
@@ -226,6 +256,11 @@ export async function addSale(sale) {
 // Update a sale by ID
 export async function updateSale(id, data) {
   const token = getAuthToken();
+
+  // Normalize enums
+  if (data.paymentType) data.paymentType = normalizeEnum(data.paymentType, "paymentType");
+  if (data.status) data.status = normalizeEnum(data.status, "status");
+
   const res = await fetch(`${BASE_URL}/sales/${id}`, {
     method: "PATCH",
     headers: {
@@ -282,6 +317,7 @@ export async function getTopProducts() {
   });
   return handleFetch(res);
 }
+
 
 // -------------------- SETTINGS --------------------
 export async function getSettings() {
