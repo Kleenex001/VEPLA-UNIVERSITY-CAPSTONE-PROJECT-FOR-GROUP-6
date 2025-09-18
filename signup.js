@@ -1,9 +1,9 @@
 // signup.js
-import { endpoints, apiRequest } from './api.js';
+import { signupUser } from './api.js';
 
 const signupForm = document.getElementById('signupForm');
 
-// === Validation Helpers ===
+// Validation Helpers 
 const showError = (input, errorElement, message) => {
   errorElement.textContent = message;
   errorElement.style.display = 'block';
@@ -16,7 +16,7 @@ const clearError = (input, errorElement) => {
   input.classList.remove('input-error');
 };
 
-// === Main Submit Handler ===
+//  Main Submit Handler 
 signupForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -25,7 +25,6 @@ signupForm.addEventListener('submit', async (e) => {
     firstName: document.getElementById('firstName'),
     lastName: document.getElementById('lastName'),
     businessName: document.getElementById('bName'),
-    username: document.getElementById('username'), // ✅ new
     email: document.getElementById('email'),
     phoneNumber: document.getElementById('phoneNumber'),
     password: document.getElementById('pWord'),
@@ -39,7 +38,6 @@ signupForm.addEventListener('submit', async (e) => {
     firstName: document.getElementById('firstNameError'),
     lastName: document.getElementById('lastNameError'),
     businessName: document.getElementById('BnameError'),
-    username: document.getElementById('usernameError'),
     email: document.getElementById('emailError'),
     phoneNumber: document.getElementById('phoneError'),
     password: document.getElementById('pwordError'),
@@ -50,7 +48,7 @@ signupForm.addEventListener('submit', async (e) => {
 
   let valid = true;
 
-  // === Field Validations ===
+  // Field Validations 
   if (fields.firstName.value.trim().length < 2) {
     showError(fields.firstName, errors.firstName, 'First name must be at least 2 characters.');
     valid = false;
@@ -65,11 +63,6 @@ signupForm.addEventListener('submit', async (e) => {
     showError(fields.businessName, errors.businessName, 'Business name must be at least 2 characters.');
     valid = false;
   } else clearError(fields.businessName, errors.businessName);
-
-  if (fields.username.value.trim().length < 3) {
-    showError(fields.username, errors.username, 'Username must be at least 3 characters.');
-    valid = false;
-  } else clearError(fields.username, errors.username);
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(fields.email.value.trim())) {
@@ -98,42 +91,40 @@ signupForm.addEventListener('submit', async (e) => {
     valid = false;
   } else clearError(fields.terms, errors.terms);
 
-  // === Submit if valid ===
   if (!valid) return;
 
+  //  Payload for Backend 
+  const payload = {
+    firstName: fields.firstName.value.trim(),
+    lastName: fields.lastName.value.trim(),
+    businessName: fields.businessName.value.trim(),
+    email: fields.email.value.trim(),
+    phoneNumber: fields.phoneNumber.value.trim(),
+    password: fields.password.value.trim(),
+  };
+
   try {
-    const payload = {
-      firstName: fields.firstName.value.trim(),
-      lastName: fields.lastName.value.trim(),
-      businessName: fields.businessName.value.trim(),
-      username: fields.username.value.trim(),   // ✅
-      userName: fields.username.value.trim(),  // ✅ backend-safe (camelCase)
-      email: fields.email.value.trim(),
-      phoneNumber: fields.phoneNumber.value.trim(),
-      password: fields.password.value.trim(),
-    };
+    const response = await signupUser(payload);
 
-    // Debug: log payload
-    console.log("Payload being sent:", payload);
+    // Check if backend returned a success message
+    if (response && (response.message || response.token)) {
+      errors.successMsg.textContent = 'Signup successful! Redirecting to login...';
+      errors.successMsg.style.display = 'block';
+      errors.successMsg.classList.remove('input-error');
 
-    const response = await apiRequest(`${endpoints.auth}/signup`, 'POST', payload);
+      signupForm.reset();
 
-    console.log('Signup response:', response);
-
-    // Success message
-    errors.successMsg.textContent = '✅ Signup successful! Redirecting to login...';
-    errors.successMsg.style.display = 'block';
-    errors.successMsg.classList.remove('input-error');
-
-    signupForm.reset();
-
-    setTimeout(() => {
-      window.location.href = 'signin.html';
-    }, 2000);
-
+      setTimeout(() => {
+        window.location.href = 'signin.html';
+      }, 2000);
+    } else {
+      errors.successMsg.textContent = `Signup failed: ${response?.message || 'Unknown error'}`;
+      errors.successMsg.style.display = 'block';
+      errors.successMsg.classList.add('input-error');
+    }
   } catch (error) {
     console.error('Signup error:', error);
-    errors.successMsg.textContent = `❌ Signup failed: ${error.message}`;
+    errors.successMsg.textContent = `Signup failed: ${error.message}`;
     errors.successMsg.style.display = 'block';
     errors.successMsg.classList.add('input-error');
   }

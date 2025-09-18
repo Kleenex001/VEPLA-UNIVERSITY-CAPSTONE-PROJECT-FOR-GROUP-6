@@ -49,9 +49,11 @@
     <header class="topbar">
        <div>
         <br><br>
+        <h2 id="greetingHeader" class="greeting"></h2>
         <br><br>
         </div>
         <span class="spacer"></span>
+        <button id="logoutBtn" class="logout-btn">Sign Out</button>
         <a href="index.html"><img src="Assets/logo.png" alt="bizboost logo" width="70px;" /></a>
     </header>
 
@@ -141,11 +143,11 @@
       </div>
     </section>
   </main>
-  
+
 <script src="config.js"></script>
 <script src="app.js"></script>
 
-  <script src="dashboard.js" defer></script>
+  <script type="module" src="dashboard.js" defer></script>
 
   <script>
     // Highlight active nav link
@@ -169,17 +171,6 @@
       });
     });
 
-    // Go Back button
-    document.getElementById('goBackBtn').addEventListener('click', () => {
-      window.history.back();
-    });
-  </script>
-  <script src="" defer></script>
-  <script>
-    //go back button
-    document.getElementById('goBackBtn').addEventListener('click', () => {
-      window.history.back();
-    });
   </script>
   <footer>
     <nav class="bottom-nav">
