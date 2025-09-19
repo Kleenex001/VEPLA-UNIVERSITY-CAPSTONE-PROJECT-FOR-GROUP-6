@@ -1,108 +1,248 @@
+import {
+  getProducts,
+  addProduct,
+  updateProduct,
+  deleteProduct
+} from './api.js';
 
-
-let products = [
-  {
-    id: 1,
-    name: "Tomato Rice",
-    stock: 100,
-    reorder: 15,
-    price: 65000,
-    expiry: "2025-12-31",
-    img: "Assets/tomato.png",
-    category: "Category A"
-  }
-];
-
-// DOM Elements
-const allTableBody = document.querySelector("#main tbody");
-const lowTableBody = document.querySelector("#low tbody");
-const expiredTableBody = document.querySelector("#expired tbody");
-
-const addProductForm = document.getElementById("addProductForm");
-const searchInput = document.querySelector(".filters input[type='text']");
-const categorySelect = document.querySelector(".filters select");
-
-// Render Products
-function renderTables() {
-  // Clear tables
-  allTableBody.innerHTML = "";
-  lowTableBody.innerHTML = "";
-  expiredTableBody.innerHTML = "";
-
-  const today = new Date();
-
-  // Apply filters
-  const searchTerm = searchInput.value.toLowerCase();
-  const selectedCategory = categorySelect.value;
-
-  const filteredProducts = products.filter(p => {
-    const matchesSearch = p.name.toLowerCase().includes(searchTerm);
-    const matchesCategory =
-      selectedCategory === "All" || p.category === selectedCategory;
-    return matchesSearch && matchesCategory;
+// === Tabs ===
+const tabs = document.querySelectorAll('.tab-buttons a');
+const contents = document.querySelectorAll('.tab-content');
+tabs.forEach(tab => {
+  tab.addEventListener('click', e => {
+    e.preventDefault();
+    tabs.forEach(t => t.classList.remove('active'));
+    contents.forEach(c => c.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.tab).classList.add('active');
   });
+});
 
-  // Loop and add rows
-  filteredProducts.forEach((product, index) => {
-    const row = `
-      <tr>
-        <td>${index + 1}</td>
-        <td><img src="${product.img}" alt="${product.name}" width="32"></td>
-        <td>${product.name}</td>
-        <td>${product.stock}</td>
-        <td>${product.reorder}</td>
-        <td>NGN${product.price.toLocaleString()}</td>
-      </tr>
-    `;
+// === DOM Elements ===
+const allProductsTable = document.querySelector('#allProductsTable tbody');
+const lowStockTable = document.querySelector('#lowStockTable tbody');
+const expiredTable = document.querySelector('#expiredTable tbody');
+const categoryFilter = document.getElementById('categoryFilter');
+const searchInput = document.getElementById('searchInput');
 
-    // All Products
-    allTableBody.insertAdjacentHTML("beforeend", row);
+// Modals
+const addProductModal = document.getElementById('addProductModal');
+const addProductBtn = document.getElementById('addProductBtn');
+const cancelAdd = document.getElementById('cancelAdd');
+const addProductForm = document.getElementById('addProductForm');
 
-    // Low Stock
-    if (product.stock < product.reorder) {
-      lowTableBody.insertAdjacentHTML("beforeend", row);
-    }
+const editProductModal = document.getElementById('editProductModal');
+const editProductForm = document.getElementById('editProductForm');
+const cancelEdit = document.getElementById('cancelEdit');
 
-    // Expired
-    if (new Date(product.expiry) < today) {
-      expiredTableBody.insertAdjacentHTML("beforeend", row);
+const deleteModal = document.getElementById('deleteModal');
+const cancelDelete = document.getElementById('cancelDelete');
+const confirmDelete = document.getElementById('confirmDelete');
+
+const purchaseModal = document.getElementById('purchaseModal');
+const purchaseForm = document.getElementById('purchaseForm');
+const purchaseQuantityInput = document.getElementById('purchaseQuantity');
+
+let products = [];
+let deleteIndex = null;
+let selectedProductId = null;
+
+// === Fetch and Render Products ===
+async function fetchProducts() {
+  try {
+    products = await getProducts();
+    renderTables();
+  } catch(err) {
+    console.error('Failed to load products', err);
+  }
+}
+
+function renderTables() {
+  allProductsTable.innerHTML = '';
+  lowStockTable.innerHTML = '';
+  expiredTable.innerHTML = '';
+  const today = new Date().toISOString().split('T')[0];
+  const searchValue = searchInput.value.toLowerCase();
+  const selectedCategory = categoryFilter.value;
+
+  products.forEach((p, i) => {
+    if ((selectedCategory === 'all' || p.category === selectedCategory) &&
+        p.name.toLowerCase().includes(searchValue)) {
+
+      const lowStockClass = p.stock <= p.reorder ? 'style="color:red;"' : '';
+
+      const tr = `<tr ${lowStockClass}>
+        <td>${i+1}</td>
+        <td>${p.name}</td>
+        <td>${p.stock}</td>
+        <td>${p.reorder}</td>
+        <td>${p.expiry || '-'}</td>
+        <td>${p.category}</td>
+        <td>₦${p.price.toLocaleString()}</td>
+        <td>
+          <button onclick="openPurchase(${p.id})">Purchase</button>
+          <button onclick="openEdit(${p.id})">Edit</button>
+          <button onclick="openDelete(${i})">Delete</button>
+        </td>
+      </tr>`;
+      allProductsTable.insertAdjacentHTML('beforeend', tr);
+
+      if(p.stock <= p.reorder){
+        const low = `<tr style="color:red;">
+          <td>${i+1}</td>
+          <td>${p.name}</td>
+          <td>${p.stock}</td>
+          <td>${p.reorder}</td>
+          <td>${p.category}</td>
+          <td>₦${p.price.toLocaleString()}</td>
+        </tr>`;
+        lowStockTable.insertAdjacentHTML('beforeend', low);
+      }
+
+      if(p.expiry && p.expiry < today){
+        const exp = `<tr style="color:gray;">
+          <td>${i+1}</td>
+          <td>${p.name}</td>
+          <td>${p.expiry}</td>
+          <td>${p.stock}</td>
+          <td>${p.category}</td>
+          <td>₦${p.price.toLocaleString()}</td>
+        </tr>`;
+        expiredTable.insertAdjacentHTML('beforeend', exp);
+      }
     }
   });
 }
 
-// Handle Add Product Form
-addProductForm.addEventListener("submit", e => {
+// === Add Product ===
+addProductBtn.onclick = () => addProductModal.classList.add('show');
+cancelAdd.onclick = () => addProductModal.classList.remove('show');
+
+addProductForm.onsubmit = async e => {
   e.preventDefault();
+  const newProduct = {
+    name: document.getElementById('productName').value,
+    stock: parseInt(document.getElementById('stockLevel').value),
+    reorder: parseInt(document.getElementById('reorderLevel').value),
+    expiry: document.getElementById('expiryDate').value,
+    category: document.getElementById('productCategory').value,
+    price: parseFloat(document.getElementById('unitPrice').value),
+  };
+  try {
+    await addProduct(newProduct);
+    await fetchProducts();
+    addProductModal.classList.remove('show');
+    addProductForm.reset();
+  } catch(err) {
+    console.error('Failed to add product', err);
+  }
+};
 
-  const name = document.getElementById("productName").value;
-  const stock = parseInt(document.getElementById("stockLevel").value);
-  const reorder = parseInt(document.getElementById("reorderLevel").value);
-  const price = parseFloat(document.getElementById("unitPrice").value);
-  const expiry = document.getElementById("expiryDate").value;
+// === Edit Product ===
+function openEdit(id){
+  selectedProductId = id;
+  const product = products.find(p => p.id === id);
+  if(!product) return;
 
-  // For now, set default image & category
-  const img = "Assets/tomato.png";
-  const category = "Category A";
+  editProductForm.name.value = product.name;
+  editProductForm.stock.value = product.stock;
+  editProductForm.reorder.value = product.reorder;
+  editProductForm.expiry.value = product.expiry;
+  editProductForm.category.value = product.category;
+  editProductForm.price.value = product.price;
 
-  products.push({
-    id: products.length + 1,
-    name,
-    stock,
-    reorder,
-    price,
-    expiry,
-    img,
-    category
-  });
+  editProductModal.classList.add('show');
+}
 
-  renderTables();
-  addProductForm.reset();
-  document.getElementById("addProductModal").style.display = "none";
-});
+cancelEdit.onclick = () => editProductModal.classList.remove('show');
 
-// Filters (Search & Category)
-searchInput.addEventListener("input", renderTables);
-categorySelect.addEventListener("change", renderTables);
+editProductForm.onsubmit = async e => {
+  e.preventDefault();
+  const updatedProduct = {
+    name: editProductForm.name.value,
+    stock: parseInt(editProductForm.stock.value),
+    reorder: parseInt(editProductForm.reorder.value),
+    expiry: editProductForm.expiry.value,
+    category: editProductForm.category.value,
+    price: parseFloat(editProductForm.price.value)
+  };
+  try {
+    await updateProduct(selectedProductId, updatedProduct);
+    await fetchProducts();
+    editProductModal.classList.remove('show');
+  } catch(err) {
+    console.error('Failed to update product', err);
+  }
+};
 
-// Init
-renderTables();
+// === Delete Product ===
+function openDelete(index){
+  deleteIndex = index;
+  deleteModal.classList.add('show');
+}
+cancelDelete.onclick = () => deleteModal.classList.remove('show');
+confirmDelete.onclick = async () => {
+  if(deleteIndex !== null){
+    try {
+      await deleteProduct(products[deleteIndex].id);
+      await fetchProducts();
+    } catch(err) {
+      console.error('Failed to delete product', err);
+    }
+  }
+  deleteModal.classList.remove('show');
+};
+
+// === Purchase Product ===
+function openPurchase(id){
+  selectedProductId = id;
+  const product = products.find(p => p.id === id);
+  if(!product) return;
+  const today = new Date().toISOString().split('T')[0];
+
+  if(product.expiry && product.expiry < today){
+    alert('Cannot purchase expired product!');
+    return;
+  }
+
+  purchaseModal.classList.add('active');
+  document.getElementById('purchaseProductName').textContent = product.name;
+  document.getElementById('purchaseUnitPrice').textContent = `₦${product.price.toLocaleString()}`;
+  document.getElementById('purchaseTotal').textContent = '₦0';
+  purchaseQuantityInput.value = '';
+
+  purchaseQuantityInput.oninput = () => {
+    const qty = parseInt(purchaseQuantityInput.value) || 0;
+    document.getElementById('purchaseTotal').textContent = `₦${(qty * product.price).toLocaleString()}`;
+  };
+}
+
+purchaseForm.onsubmit = async e => {
+  e.preventDefault();
+  const quantity = parseInt(purchaseQuantityInput.value);
+  if(quantity > 0 && selectedProductId){
+    const product = products.find(p => p.id === selectedProductId);
+    try {
+      await updateProduct(selectedProductId, { stock: product.stock + quantity });
+      await fetchProducts();
+      purchaseModal.classList.remove('active');
+    } catch(err) {
+      console.error('Failed to update stock', err);
+    }
+  }
+};
+
+// Close purchase modal
+document.getElementById('closeModal').onclick = () => purchaseModal.classList.remove('active');
+window.onclick = (event) => {
+  if(event.target === purchaseModal){
+    purchaseModal.classList.remove('active');
+  }
+};
+
+// === Filters Events ===
+searchInput.addEventListener('input', renderTables);
+categoryFilter.addEventListener('change', renderTables);
+
+// Initial fetch
+fetchProducts();
